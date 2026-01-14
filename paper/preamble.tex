@@ -1,41 +1,142 @@
-% ============================
-% preamble.tex — DRT Platinum
-% ============================
+% ============================================================
+% preamble.tex
+% ============================================================
+% LaTeX preamble for the DRT paper.
+%
+% IMPORTANT:
+%  - This file MUST NOT contain \documentclass or \begin{document}.
+%  - main.tex is the only compilation entry point.
+%
+% Notes:
+%  - The package physics.sty is not available in the current TeXLive
+%    environment. We use a minimal, portable substitute instead.
+% ============================================================
 
+% ------------------------------------------------------------
+% Encoding and fonts
+% ------------------------------------------------------------
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 
+% ------------------------------------------------------------
+% Page layout
+% ------------------------------------------------------------
 \usepackage{geometry}
-\geometry{margin=2.5cm}
+\geometry{
+  left=2.5cm,
+  right=2.5cm,
+  top=2.8cm,
+  bottom=3.0cm
+}
 
+% ------------------------------------------------------------
+% Typography and spacing
+% ------------------------------------------------------------
 \usepackage{microtype}
-\usepackage{amsmath, amssymb}
+\usepackage{setspace}
+\onehalfspacing
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% Overfull line mitigation (global, minimal)
+\setlength{\emergencystretch}{2em}
+\hfuzz=0.5pt
+
+% ------------------------------------------------------------
+% Mathematics
+% ------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{bm}
+\usepackage{mathtools}
 
+% Theorem environments (used sparingly, operational focus)
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+% ------------------------------------------------------------
+% Minimal "physics" substitutes (portable)
+% ------------------------------------------------------------
+\usepackage{braket}
+
+% Derivatives
+\newcommand{\dv}[2]{\frac{d #1}{d #2}}
+\newcommand{\ddv}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\pdv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pddv}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+
+% Absolute value and norm
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+% Expectation value (classical)
+\newcommand{\expval}[1]{\left\langle #1 \right\rangle}
+
+% ------------------------------------------------------------
+% Figures and tables
+% ------------------------------------------------------------
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{booktabs}
+\usepackage{longtable}
+
+% External PDF inclusion (figures generated from Evidence Pack)
+\usepackage{pdfpages}
+
+% ------------------------------------------------------------
+% References and hyperlinks
+% ------------------------------------------------------------
 \usepackage{hyperref}
-\usepackage{xcolor}
-
-% Figures live one level up: ../figures/*.pdf
-\graphicspath{{../figures/}}
-
-% Hyperref setup
 \hypersetup{
   colorlinks=true,
   linkcolor=blue,
   citecolor=blue,
   urlcolor=blue,
-  pdftitle={Distinguishability Rate Theory (DRT)},
-  pdfauthor={Alex Yashin},
+  pdfauthor={Alexander Yashin},
+  pdftitle={Distinguishability as a Physical Primitive}
 }
 
-% Small macros used in captions/text
-\newcommand{\dd}{\mathrm{d}}
-\newcommand{\ee}{\mathrm{e}}
-\newcommand{\Var}{\mathrm{Var}}
-\newcommand{\Fisher}{\mathcal{I}}
+% ------------------------------------------------------------
+% Lists
+% ------------------------------------------------------------
+\usepackage{enumitem}
+\setlist{noitemsep, topsep=0.3em}
 
-% Make figure captions slightly smaller (optional, safe)
-\usepackage[font=small,labelfont=bf]{caption}
+% ------------------------------------------------------------
+% Utilities
+% ------------------------------------------------------------
+\usepackage{xcolor}
+
+% ------------------------------------------------------------
+% Custom commands (minimal, semantic only)
+% ------------------------------------------------------------
+
+% Distinguishability rate
+\newcommand{\DistRate}{v_{\mathrm{D}}}
+
+% Fisher Information
+\newcommand{\FI}{\mathcal{I}}
+
+% Quantum Fisher Information
+\newcommand{\QFI}{\mathcal{F}_{Q}}
+
+% Observation flux (photon / event rate)
+\newcommand{\Flux}{\Phi}
+
+% Minimal resolvable time
+\newcommand{\deltat}{\delta t_{\min}}
+
+% ------------------------------------------------------------
+% Document hygiene
+% ------------------------------------------------------------
+\sloppy
+\raggedbottom
+
+% ============================================================
+% End of preamble.tex
+% ============================================================
