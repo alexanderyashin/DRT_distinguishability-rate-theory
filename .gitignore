@@ -18,16 +18,20 @@ venv/
 .ipynb_checkpoints/
 
 # ============================
-# Results & figures (generated)
+# Results (generated) — keep README if present
 # ============================
 results/*
 !results/README.md
 
+# ============================
+# Figures (generated) — MODE B: track PDFs, ignore everything else
+# ============================
 figures/*
+!figures/*.pdf
 !figures/README.md
 
 # ============================
-# LaTeX build artifacts
+# LaTeX build artifacts (paper/) — keep final PDF and sources, ignore aux junk
 # ============================
 paper/*.aux
 paper/*.bbl
