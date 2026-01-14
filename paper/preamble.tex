@@ -1,0 +1,41 @@
+% ============================
+% preamble.tex — DRT Platinum
+% ============================
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{bm}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+% Figures live one level up: ../figures/*.pdf
+\graphicspath{{../figures/}}
+
+% Hyperref setup
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdftitle={Distinguishability Rate Theory (DRT)},
+  pdfauthor={Alex Yashin},
+}
+
+% Small macros used in captions/text
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Fisher}{\mathcal{I}}
+
+% Make figure captions slightly smaller (optional, safe)
+\usepackage[font=small,labelfont=bf]{caption}

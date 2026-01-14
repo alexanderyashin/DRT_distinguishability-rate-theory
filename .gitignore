@@ -1,0 +1,60 @@
+# ============================
+# Python
+# ============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.env/
+
+# ============================
+# Jupyter / notebooks (not used, but just in case)
+# ============================
+.ipynb_checkpoints/
+
+# ============================
+# Results & figures (generated)
+# ============================
+results/*
+!results/README.md
+
+figures/*
+!figures/README.md
+
+# ============================
+# LaTeX build artifacts
+# ============================
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.lof
+paper/*.lot
+paper/*.synctex.gz
+paper/*.run.xml
+paper/_minted*
+
+# ============================
+# OS / editors
+# ============================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# ============================
+# Misc
+# ============================
+*.bak
+*.tmp

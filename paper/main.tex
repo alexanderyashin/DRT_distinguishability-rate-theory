@@ -1,0 +1,106 @@
+\documentclass[11pt,a4paper]{article}
+
+\input{preamble}
+
+\title{Distinguishability Rate Theory (DRT):\\ Operational limits of time and phase resolution from information-theoretic constraints}
+\author{Alex Yashin}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present \emph{Distinguishability Rate Theory} (DRT), an operational framework that bounds time and phase resolution by the rate at which distinguishability (Fisher information / statistical separability) can be accumulated under realistic measurement constraints. The formalism yields universal scaling laws, including the self-consistent localization bound $\delta t_{\min}\propto \Phi^{-1/3}$ under Poisson-limited observation for normal diffusion, and $\delta t_{\min}\propto \Phi^{-1/(2+\alpha)}$ for anomalous diffusion with $\mathrm{MSD}\sim t^\alpha$. We connect these rate-limited inference bounds to standard interferometric settings (Ramsey and Mach--Zehnder), and provide numerically stable Monte Carlo simulations and reproducible figure-generation scripts.
+\end{abstract}
+
+\section{Overview}
+DRT is motivated by a simple principle: \emph{inference is rate-limited}. Even if a parameter (time, phase, frequency) is physically encoded in a system, one can only resolve it as fast as information about that parameter is acquired through a measurement channel. The relevant quantity is an information accumulation functional (classical/quantum Fisher information), suppressed by noise and constrained by measurement statistics.
+
+Figure~\ref{fig:overview} summarizes the conceptual pipeline used throughout this work.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.98\linewidth]{fig1_overview.pdf}
+  \caption{DRT concept overview: distinguishability accumulates at a finite rate determined by the measurement channel, noise, and statistics. Operational resolution bounds follow from rate-limited inference.}
+  \label{fig:overview}
+\end{figure}
+
+\section{Master inequality cartoon}
+The central idea can be expressed as comparing an \emph{ideal} information accumulation to a \emph{noise-suppressed} upper bound. Figure~\ref{fig:master} provides the schematic structure used across scenarios.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig2_master_inequality_cartoon.pdf}
+  \caption{Schematic master inequality: ideal information accumulation versus an upper bound suppressed by noise and finite-rate observation.}
+  \label{fig:master}
+\end{figure}
+
+\section{Poisson-limited diffusion localization: $\Phi^{-1/3}$}
+We consider one-dimensional Brownian motion with diffusion coefficient $D$, observed through Poisson-distributed photon detections with flux $\Phi$. Each detection yields a position estimate with Gaussian point-spread uncertainty $\sigma_m$. A self-consistent fixed-point argument yields the operational bound
+\begin{equation}
+  \delta t_{\min} \propto \Phi^{-1/3}.
+\end{equation}
+The Monte Carlo simulation confirms the scaling, producing a fitted slope close to $-1/3$ on log--log axes; see Figure~\ref{fig:phi}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig3_phi_scaling.pdf}
+  \caption{Monte Carlo confirmation of $\delta t_{\min}\propto \Phi^{-1/3}$ in Poisson-limited diffusion localization.}
+  \label{fig:phi}
+\end{figure}
+
+\section{Continuous monitoring / OU-process bound}
+For continuous monitoring with an Ornstein--Uhlenbeck process parameter $\gamma$, Fisher information accumulates only through temporal correlations; this yields an operational scaling for $\delta\gamma_{\min}$ that improves with observation time but is limited by noise. Figure~\ref{fig:ou} summarizes the bound used in the paper.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig4_ou_gamma_bound.pdf}
+  \caption{OU-process / continuous monitoring bound: correlation-driven Fisher information yields an operational limit on parameter resolution.}
+  \label{fig:ou}
+\end{figure}
+
+\section{Meeting-point phase diagrams: Ramsey and Mach--Zehnder}
+DRT predicts a meeting-point where an inference-limited phase scale intersects a dynamical/geometric scale. We show the crossing in the Ramsey case (Figure~\ref{fig:ramsey}) and in the Mach--Zehnder case (Figure~\ref{fig:mzi}), illustrating operational equivalence under visibility/noise constraints.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig5_ramsey_phase_diagram.pdf}
+  \caption{Ramsey meeting-point: inference-limited $\delta\phi_{\inf}$ versus dynamical scale $\delta\phi_{\mathrm{dyn}}$. The crossing indicates the operational boundary.}
+  \label{fig:ramsey}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig6_mzi_visibility.pdf}
+  \caption{Mach--Zehnder meeting-point: inference-limited $\delta\phi_{\inf}$ versus geometric scale $\delta\phi_{\mathrm{geom}}$.}
+  \label{fig:mzi}
+\end{figure}
+
+\section{Universal noise suppression of Fisher accumulation}
+Noise reduces distinguishability rates. A generic exponential suppression factor $\exp(-2\Gamma t)$ yields an upper bound on accumulated Fisher information. Figure~\ref{fig:noise} visualizes the ideal accumulation versus the noise-suppressed envelope.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.85\linewidth]{fig7_noise_suppression_bound.pdf}
+  \caption{Noise suppresses Fisher accumulation: an ideal linear growth is replaced by a bounded envelope under exponential suppression.}
+  \label{fig:noise}
+\end{figure}
+
+\section{Reproducibility}
+All results in this repository are reproducible via:
+\begin{verbatim}
+make doctor
+make setup
+make sims
+make figs
+make pdf
+\end{verbatim}
+Simulation outputs are stored in \texttt{results/*.json} and figures in \texttt{figures/*.pdf}.
+
+\section*{Acknowledgements}
+(Placeholder.)
+
+\bibliographystyle{unsrt}
+\bibliography{refs}
+
+\end{document}

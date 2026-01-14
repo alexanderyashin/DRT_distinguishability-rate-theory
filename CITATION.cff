@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Distinguishability Rate Theory: Epistemic Limits, Time Resolution, and the Boundary of Quantum Ontology"
+type: software
+authors:
+  - family-names: Yashin
+    given-names: Alexander
+    orcid: https://orcid.org/0000-0000-0000-0000
+repository-code: https://github.com/<to-be-created>/drt-platinum
+abstract: >
+  This repository contains the full source code, simulations, and LaTeX
+  manuscript for a journal-grade study of Distinguishability Rate Theory (DRT).
+  The work develops a unified information-theoretic framework for operational
+  limits of inference, minimal time resolution, and the boundary between
+  epistemic constraints and ontological nonclassicality in quantum mechanics.
+keywords:
+  - distinguishability
+  - fisher information
+  - quantum fisher information
+  - time resolution
+  - quantum foundations
+  - information theory
+license: MIT
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Yashin
+      given-names: Alexander
+  title: "Distinguishability Rate Theory: Epistemic Limits, Time Resolution, and the Boundary of Quantum Ontology"
+  journal: "Zenodo (preprint)"
+  year: 2026
+  doi: 10.5281/zenodo.TODO
