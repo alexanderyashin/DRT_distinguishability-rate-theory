@@ -30,14 +30,16 @@ A master inequality constrains achievable resolution by the envelope of
 distinguishability accumulation imposed by a given observation channel
 (Section~\ref{sec:rate_limited_bounds}).
 
-\item \textbf{Self-consistent scaling laws.}
-For Poisson-limited diffusion, the operational localization bound
-$\delta t_{\min}\propto \Flux^{-1/3}$ is derived from a fixed-point inference
-argument and confirmed numerically.
-The same logic yields the generalized scaling
-$\delta t_{\min}\propto \Flux^{-1/(2+\alpha)}$ for anomalous transport with
-$\mathrm{MSD}\sim t^\alpha$
+\item \textbf{Self-consistent scaling constructions.}
+For Poisson-limited diffusion, the operational localization scaling
+$\delta t_{\min}\propto \Flux^{-1/3}$ is obtained as a
+\emph{self-consistent fixed-point construction} (Class~0A; non-inference)
+under the specified observation model
 (Section~\ref{sec:classical_diffusion}).
+The same analytic logic yields the generalized scaling
+$\delta t_{\min}\propto \Flux^{-1/(2+\alpha)}$ for anomalous transport with
+$\mathrm{MSD}\sim t^\alpha$, likewise interpreted as a construction rather than
+an inference-supported bound.
 
 \item \textbf{Non-\iid\ inference and correlation no-go.}
 Continuous monitoring is shown to constitute an intrinsically non-\iid\
@@ -64,10 +66,13 @@ increase of distinguishability resources.
 Constraints that persist under such exhaustion signal non-epistemic structure.
 
 \paragraph{Evidence and falsifiability.}
-All analytic results are supported by frozen, fully reproducible Monte Carlo
-evidence.
+Analytic constructions are accompanied by frozen, fully reproducible numerical
+simulations that serve as \emph{consistency checks} of the underlying models and
+analysis pipelines.
+Inference-supported claims are explicitly restricted to decision-based
+simulations implementing operational distinguishability thresholds.
 Core claims are falsifiable by observing systematic violations of the predicted
-rate-dependent scalings or by extracting parameter information from statistical
+rate-dependent envelopes or by extracting parameter information from statistical
 marginals in regimes where DRT predicts correlation-only access.
 
 \paragraph{Scope.}

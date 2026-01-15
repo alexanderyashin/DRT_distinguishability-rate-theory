@@ -2,25 +2,29 @@
 % appendices/A_phi_minus_one_third.tex  (FULL REPLACEMENT)
 % ============================================================
 
-\section{Self-Consistent Derivation of the \texorpdfstring{$\boldsymbol{\Phi^{-1/3}}$}{Phi(-1/3) Scaling}}
+\section{Self-Consistent Fixed-Point Derivation of the
+\texorpdfstring{$\boldsymbol{\Phi^{-1/3}}$}{Phi(-1/3) Scaling}}
 \label{app:phi_minus_one_third}
 
-This appendix provides an explicit self-consistent derivation of the
-cubic-root scaling
-$\delta t_{\min}\propto \Phi^{-1/3}$ for photon-limited temporal localization of a
-diffusive particle.
-The derivation is purely operational and inference-based.
-No microscopic assumptions are invoked beyond normal diffusion, Poisson
-detection statistics, and finite measurement noise.
+This appendix provides an explicit self-consistent fixed-point
+\emph{construction} of the cubic-root scaling
+$\delta t_{\min}\propto \Phi^{-1/3}$ for photon-limited temporal
+localization of a diffusive particle.
+The derivation is purely operational and does not constitute
+decision-based inference evidence.
+No microscopic assumptions are invoked beyond normal diffusion,
+Poisson detection statistics, finite measurement noise, and the
+existence of a self-consistent closure.
 
 \subsection{Setup and assumptions}
 
-We consider one-dimensional Brownian motion with diffusion coefficient $D$,
+We consider one-dimensional Brownian motion with diffusion coefficient
+$D$,
 \begin{equation}
 \langle x^2(t)\rangle = 2Dt,
 \end{equation}
-observed through a Poisson point process of detection events with constant photon
-flux $\Phi$.
+observed through a Poisson point process of detection events with
+constant photon flux $\Phi$.
 Each detection yields an independent position estimate with Gaussian
 point-spread uncertainty $\sigma_m$.
 
@@ -28,20 +32,22 @@ The assumptions are:
 \begin{enumerate}
 \item Normal diffusion with finite $D$ and no drift.
 \item Poissonian detection statistics with rate $\Phi$.
-\item Independent measurement noise with variance $\sigma_m^2$ per detection.
-\item Local inference governed by a fixed distinguishability threshold $D^\ast$
-(Appendix~\ref{app:fisher_qfi}).
+\item Independent measurement noise with variance $\sigma_m^2$ per
+detection.
+\item A fixed operational distinguishability threshold $D^\ast$
+(Appendix~\ref{app:fisher_qfi}) used as an internal decision criterion
+within the construction.
 \end{enumerate}
 
 \subsection{Operational localization variance}
 
-Let $\sigma^2(t)$ denote the effective localization variance conditioned on the
-measurement record accumulated up to time $t$.
+Let $\sigma^2(t)$ denote the effective localization variance conditioned
+on the measurement record accumulated up to time $t$.
 Two competing mechanisms determine $\sigma^2(t)$:
 \begin{itemize}
 \item \textbf{Diffusive spreading:} uncertainty increases as $2Dt$.
-\item \textbf{Measurement-induced reduction:} information accumulates at rate
-$\Phi$, reducing variance as $\sigma_m^2/(\Phi t)$.
+\item \textbf{Measurement-induced reduction:} information accumulates at
+rate $\Phi$, reducing variance as $\sigma_m^2/(\Phi t)$.
 \end{itemize}
 
 To leading operational order, the localization variance is therefore
@@ -49,13 +55,14 @@ To leading operational order, the localization variance is therefore
 \sigma^2(t)\;\sim\; 2Dt \;+\; \frac{\sigma_m^2}{\Phi t}.
 \label{eq:sigma_balance}
 \end{equation}
-This expression captures the feedback between stochastic spreading and finite-rate
-information acquisition.
+This expression captures the feedback between stochastic spreading and
+finite-rate information acquisition under the specified observation
+model.
 
 \subsection{Self-consistent fixed point}
 
-The characteristic inference time scale is obtained by minimizing
-$\sigma^2(t)$ with respect to $t$.
+The characteristic time scale associated with the construction is
+obtained by minimizing $\sigma^2(t)$ with respect to $t$.
 Differentiating Eq.~\eqref{eq:sigma_balance} gives
 \begin{equation}
 \frac{d\sigma^2}{dt}
@@ -68,23 +75,25 @@ t_\ast
 \left(\frac{\sigma_m^2}{D\,\Phi}\right)^{1/3}.
 \label{eq:t_star}
 \end{equation}
-This time scale marks the balance between diffusion-induced uncertainty growth and
-measurement-induced uncertainty reduction.
+This time scale marks the balance between diffusion-induced uncertainty
+growth and measurement-induced uncertainty reduction.
 
 \subsection{Temporal distinguishability}
 
-Temporal distinguishability arises because the diffusive state depends on time.
-For small temporal offsets $\delta t$, the Fisher information about time scales
-inversely with the localization variance,
+Temporal distinguishability arises because the diffusive state depends on
+time.
+For small temporal offsets $\delta t$, the Fisher information about time
+scales inversely with the localization variance,
 \begin{equation}
 I_T(t) \;\sim\; \frac{t}{\sigma^2(t)},
 \label{eq:fi_scaling}
 \end{equation}
 up to dimensionless constants that do not affect scaling.
-This reflects the fact that resolving time requires resolving changes in the
-diffusive width over the observation interval.
+This relation expresses how changes in diffusive width encode temporal
+information under the assumed channel.
 
-Evaluating Eq.~\eqref{eq:fi_scaling} at the self-consistent scale $t_\ast$ yields
+Evaluating Eq.~\eqref{eq:fi_scaling} at the self-consistent scale $t_\ast$
+yields
 \begin{equation}
 I_T(t_\ast)
 \;\sim\;
@@ -97,11 +106,12 @@ where numerical prefactors have been suppressed.
 \subsection{Operational time resolution}
 
 The minimal resolvable temporal offset $\delta t_{\min}$ follows from the
-decision criterion
+operational decision criterion
 \begin{equation}
-\delta t^2\, I_T \;\gtrsim\; 2D^\ast.
+\delta t^2\, I_T \;\gtrsim\; 2D^\ast,
 \label{eq:decision_again}
 \end{equation}
+which is used here as an internal consistency condition.
 Substituting the scaling of $I_T(t_\ast)$ gives
 \begin{equation}
 \delta t_{\min}
@@ -115,31 +125,34 @@ or equivalently,
 
 \subsection{Interpretation}
 
-The cubic-root scaling is not a consequence of dimensional analysis alone.
+The cubic-root scaling does not arise from dimensional analysis alone.
 It emerges from a self-consistent balance between:
 \begin{enumerate}
 \item stochastic diffusive spreading,
 \item Poisson-limited information acquisition, and
 \item a fixed operational distinguishability threshold.
 \end{enumerate}
-Changing any of these ingredients modifies the scaling.
+Changing any of these ingredients modifies the resulting scaling.
 
 \subsection{Epistemic status and validity}
 
-The $\Phi^{-1/3}$ law is epistemic.
-It vanishes in the limits $\Phi\to\infty$ or $\sigma_m\to 0$, reflecting improved
-inference rather than any intrinsic discreteness of time.
-Its validity is restricted to the inference-limited regime; pre-asymptotic
-effects or alternative observation channels modify the effective behavior.
+The $\Phi^{-1/3}$ law obtained here is epistemic and
+construction-based.
+It reflects limitations imposed by the specified observation channel
+and vanishes in the limits $\Phi\to\infty$ or $\sigma_m\to 0$, indicating
+improved accessibility rather than intrinsic discreteness of time.
+Its validity is restricted to the self-consistent regime defined by the
+assumptions above; pre-asymptotic effects or alternative observation
+channels modify the effective behavior.
 
 \subsection{Connection to generalizations}
 
 For anomalous diffusion with $\mathrm{MSD}\sim t^\alpha$, the same
-self-consistency logic yields
+self-consistent closure logic yields
 $\delta t_{\min}\propto\Phi^{-1/(2+\alpha)}$, as derived in
 Appendix~B.
-The normal diffusion case corresponds to $\alpha=1$ and serves as the canonical
-baseline.
+The normal diffusion case corresponds to $\alpha=1$ and serves as the
+canonical baseline of the construction.
 
 % ============================================================
 % End of appendices/A_phi_minus_one_third.tex

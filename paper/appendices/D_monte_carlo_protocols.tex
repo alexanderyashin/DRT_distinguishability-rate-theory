@@ -6,11 +6,25 @@
 \label{app:monte_carlo}
 
 This appendix documents the numerical protocols underlying all
-simulation-based results in the paper.
-Its role is \emph{strictly confirmatory}: no simulation output is used to
-formulate, motivate, tune, or select analytic claims.
-All numerical studies serve exclusively to verify rate-limited scalings
-derived independently in the main text.
+simulation-based material in the paper.
+Monte Carlo simulations are used exclusively for reproducibility,
+consistency checks, and illustration of operational regimes.
+They are not used to derive, discover, validate, or confirm analytic
+scaling laws or bounds.
+
+Throughout, simulations are classified according to their epistemic
+role:
+\begin{itemize}
+\item \textbf{Class I:} decision-based inference simulations, in which a
+resolution scale is operationally inferred from data using an explicit
+decision criterion.
+\item \textbf{Class 0A:} self-consistent fixed-point constructions, where
+scaling behavior follows from imposed balance conditions rather than
+inference.
+\item \textbf{Class 0B:} exponent-imposed generators, in which transport
+exponents are fixed by construction and numerical output serves as a
+sanity check of implementation.
+\end{itemize}
 
 \subsection{Design principles}
 
@@ -23,122 +37,137 @@ All stochastic dynamics, observation channels, and target parameters are
 fully specified analytically before any simulation is executed.
 
 \item \textbf{A priori parameter fixing.}
-Physical, statistical, and measurement parameters are fixed in advance and
-documented.
-No post-hoc adjustment, tuning, or optimization based on simulation outcomes
-is permitted.
+Physical, statistical, and measurement parameters are fixed in advance
+and documented.
+No post-hoc adjustment, tuning, or optimization based on simulation
+outcomes is permitted.
 
-\item \textbf{Decision-based extraction.}
-Operational resolution scales are extracted exclusively via the fixed
-decision criterion defined in Eq.~\eqref{eq:decision_threshold}.
-Neither visual inspection nor heuristic fitting is used to define resolution.
+\item \textbf{Decision-based extraction (Class I only).}
+When inference is performed, operational resolution scales are extracted
+exclusively via the fixed decision criterion defined in
+Eq.~\eqref{eq:decision_threshold}.
+No curve fitting, visual inspection, or exponent matching is used to
+define resolution.
 
 \item \textbf{Deterministic analysis pipeline.}
-Given stored random seeds and simulation outputs, all analysis and figures
-are generated deterministically by scripted procedures.
+Given stored random seeds and simulation outputs, all analysis and
+figures are generated deterministically by scripted procedures.
 
 \item \textbf{Unidirectional data flow.}
-Simulation, analysis, and visualization are implemented in separate scripts
-with a strict one-way dependency structure.
+Simulation, analysis, and visualization are implemented in separate
+scripts with a strict one-way dependency structure.
 Raw outputs are never overwritten.
 \end{enumerate}
 
-These principles enforce a sharp separation between theory and numerical
-verification and prevent circular inference.
+These principles enforce a sharp separation between analytic reasoning
+and numerical implementation and prevent circular inference.
 
-\subsection{Normal diffusion simulations}
+\subsection{Normal diffusion}
 
-For normal diffusion, particle trajectories are generated as discrete-time
-approximations to Brownian motion with diffusion coefficient $D$.
-Photon detections are generated as a Poisson point process with flux $\Flux$.
-Each detection yields a position measurement corrupted by Gaussian noise with
-standard deviation $\sigma_m$.
+Normal diffusion simulations fall into two distinct classes.
 
-For each fixed parameter triple $(D,\Flux,\sigma_m)$, an ensemble of
-independent trajectories is simulated.
-The minimal resolvable time scale $\delta t_{\min}$ is extracted by explicit
-application of the operational decision criterion
-(Eq.~\eqref{eq:decision_threshold}), rather than by curve fitting or visual
-inspection.
+\paragraph{Class I: decision-based inference.}
+In the simulation
+\texttt{diffusion\_time\_inference\_mc.py}, particle trajectories are
+generated as Brownian motion with diffusion coefficient $D$ and observed
+through a Poisson detection process with flux $\Flux$ and Gaussian
+measurement noise $\sigma_m$.
+The minimal resolvable time scale $\delta t_{\min}$ is inferred directly
+from data using the operational decision criterion
+(Eq.~\eqref{eq:decision_threshold}).
+No exponent is imposed or assumed.
+This is the only simulation in the repository that supports
+$\Flux$-scaling claims at the level of inference.
 
-Power-law exponents are obtained via linear regression on log--log axes over
-an asymptotic regime selected by a fixed, rule-based criterion (minimum flux
-and observation-time thresholds).
-The same criterion is applied uniformly across all parameter sets.
+\paragraph{Class 0A: fixed-point constructions.}
+Additional diffusion simulations implement the self-consistent balance
+described in Appendix~\ref{app:phi_minus_one_third}.
+In these cases, the cubic-root scaling
+$\delta t_{\min}\propto \Flux^{-1/3}$ is encoded by construction through
+the fixed-point condition.
+Numerical results serve to verify internal consistency and numerical
+stability of the implementation, not to infer or validate the exponent.
 
 \paragraph{Outputs.}
-Simulation outputs are stored as structured JSON files in the
-\texttt{results/} directory and are never overwritten.
-Figures~\ref{fig:phi_scaling} and~\ref{fig:phi_hist} are generated exclusively
-from these stored artifacts.
+All outputs are stored as structured JSON files in the \texttt{results/}
+directory and are never overwritten.
+Figures~\ref{fig:phi_scaling} and~\ref{fig:phi_hist} visualize these
+results with their corresponding epistemic classification.
 
 \subsection{Anomalous diffusion (CTRW)}
 
-Anomalous diffusion is modeled using continuous-time random walks (CTRW) with
-heavy-tailed waiting-time distributions, yielding
+Anomalous diffusion is modeled using continuous-time random walks (CTRW)
+with heavy-tailed waiting-time distributions yielding
 $\mathrm{MSD}\sim t^\alpha$.
-Trajectories are generated via inverse-transform sampling for waiting times
-and Gaussian jump distributions.
+In all CTRW simulations, the transport exponent $\alpha$ is fixed
+\emph{a priori} as part of the model specification.
 
-Extraction of $\delta t_{\min}$ and scaling exponents follows the identical
-decision-based pipeline used for normal diffusion.
-Numerical slopes are compared directly against the predicted exponent
-$-1/(2+\alpha)$ with no adjustable parameters.
-Results are summarized in Appendix~B and Figure~\ref{fig:ctrw_alpha}.
+The resulting scaling
+$\delta t_{\min}\propto \Flux^{-1/(2+\alpha)}$ is therefore imposed by
+construction through the assumed MSD.
+Monte Carlo simulations function as Class~0B generators: they verify
+that the numerical pipeline reproduces the behavior implied by the
+specified exponent and observation model.
+No inference or data-driven extraction of $\alpha$ or the scaling
+exponent is performed.
+
+Results are summarized in Appendix~\ref{app:ctrw_derivations} and
+Figure~\ref{fig:ctrw_alpha} with this epistemic status.
 
 \subsection{Continuous monitoring and OU processes}
 
-For the Ornstein--Uhlenbeck process, trajectories are generated using exact
-discretization schemes to avoid time-step artifacts.
-Inference of the relaxation rate $\gamma$ is performed using estimators based
-on temporal correlations, in accordance with the Fisher-information analysis
-of Section~\ref{sec:continuous_monitoring}.
+For the Ornstein--Uhlenbeck process, trajectories are generated using
+exact discretization schemes to avoid time-step artifacts.
+Inference of the relaxation rate $\gamma$ relies on temporal
+correlations, in accordance with the Fisher-information analysis of
+Section~\ref{sec:continuous_monitoring}.
 
-Accumulated Fisher information is computed as a function of observation time
-$T$, and the inferred resolution is compared directly against the analytic
+Accumulated Fisher information is computed as a function of observation
+time $T$, and the inferred resolution is compared against the analytic
 bound in Eq.~\eqref{eq:ou_bound}.
-Numerical results are summarized in Figure~\ref{fig:ou}.
+These simulations illustrate the distinction between marginal and
+correlation-based inference and do not introduce additional scaling
+claims.
 
 \subsection{Quantum interferometric simulations}
 
 Ramsey and Mach--Zehnder interferometric scenarios are simulated using
 effective models for visibility loss and decoherence.
-Quantum Fisher information is computed either analytically (when closed-form
-expressions are available) or numerically from the parameter dependence of
-simulated outcome distributions, following standard QFI constructions.
-
-Meeting-point behavior between inference-limited and dynamical or geometric
-scales is extracted without fitted parameters.
-Figures~\ref{fig:ramsey}--\ref{fig:noise} visualize these comparisons.
+Quantum Fisher information is computed either analytically or
+numerically from outcome distributions.
+Meeting-point behavior between inference-limited and dynamical or
+geometric scales is visualized without fitted parameters
+(Figures~\ref{fig:ramsey}--\ref{fig:noise}).
 
 \subsection{Random seeds and numerical determinism}
 
-All simulations employ explicit random seeds recorded in the corresponding
-JSON outputs.
-Re-running the full pipeline with identical inputs reproduces all figures
-within floating-point tolerance.
-Platform-dependent roundoff differences do not affect extracted scaling
-exponents or regime classification.
+All simulations employ explicit random seeds recorded in the
+corresponding JSON outputs.
+Re-running the full pipeline with identical inputs reproduces all
+figures within floating-point tolerance.
+Platform-dependent roundoff differences do not affect qualitative
+behavior or epistemic classification.
 
 \subsection{One-command reproducibility}
 
-All numerical results and figures can be regenerated from a clean environment
-via the command sequence:
+All numerical results and figures can be regenerated from a clean
+environment via:
 \begin{verbatim}
 make setup
 make sims
 make figs
 make pdf
 \end{verbatim}
-The build process is documented in the project \texttt{Makefile} and contains
-no interactive steps.
+The build process is documented in the project \texttt{Makefile} and
+contains no interactive steps.
 
 \subsection{Explicit non-claims}
 
-Monte Carlo simulations are not used to discover scaling laws, define bounds,
-select theoretical models, or justify ontological claims.
-Their sole function is independent verification of analytically derived,
-rate-limited predictions and illustration of regimes of validity.
+Monte Carlo simulations in this work do not establish scaling laws,
+confirm analytic derivations, or justify ontological conclusions.
+They serve solely to demonstrate reproducibility, numerical
+consistency, and the operational regimes assumed by the analytic
+framework.
 
 % ============================================================
 % End of appendices/D_monte_carlo_protocols.tex
