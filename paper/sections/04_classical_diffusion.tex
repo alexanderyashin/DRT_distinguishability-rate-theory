@@ -1,69 +1,75 @@
 % ============================================================
-% sections/04_classical_diffusion.tex
+% sections/04_classical_diffusion.tex  (FULL REPLACEMENT)
 % ============================================================
 
 \section{Classical Diffusion}
 \label{sec:classical_diffusion}
 
-This section provides a concrete classical realization of the rate-limited
-framework by analyzing inference of elapsed time from a diffusive trajectory
-under photon-limited observation. No new stochastic physics is introduced.
-Rather, the goal is to demonstrate how a universal operational scaling emerges
-from information-rate constraints and self-consistent inference alone.
+This section provides a concrete classical realization of the
+rate-limited framework. We analyze inference of elapsed time from a
+diffusive trajectory observed through a photon-limited channel.
+No new stochastic physics is introduced. The purpose is to show how a
+universal operational scaling law follows from information-rate
+constraints and self-consistent inference alone.
 
 \subsection{Model and observation channel}
 
-We consider a particle undergoing one-dimensional normal diffusion with
-diffusion coefficient $D$, such that the mean-square displacement satisfies
+We consider one-dimensional normal diffusion with diffusion coefficient
+$D$, characterized by the mean-squared displacement
 \begin{equation}
 \langle x^2(t) \rangle = 2Dt .
 \end{equation}
-The particle is observed through a Poissonian detection process with photon
-flux $\Flux$. Each detection yields a noisy position estimate with Gaussian
-point-spread uncertainty $\sigma_m$.
+The system is observed via a Poissonian detection process with photon
+flux $\Flux$. Each detection produces a noisy position estimate with
+Gaussian point-spread uncertainty $\sigma_m$.
 
-The observation channel is therefore characterized by:
-(i) i.i.d.\ Poisson count statistics,
-(ii) finite spatial resolution $\sigma_m$, and
-(iii) continuous temporal evolution of an unobserved latent trajectory.
-The parameter of interest is the elapsed time $t$, inferred indirectly through
-the observed spatial statistics.
+The observation channel is specified by:
+\begin{itemize}
+\item[(C1)] Poissonian (i.i.d.) photon counts with mean rate $\Flux$;
+\item[(C2)] finite spatial resolution $\sigma_m$;
+\item[(C3)] continuous-time latent diffusion dynamics.
+\end{itemize}
+The inferred parameter is the elapsed time $t$, accessed indirectly
+through the statistics of measured positions.
 
-\subsection{Information accumulation under diffusion}
+\subsection{Information accumulation mechanism}
 
-Each detection event contributes a finite amount of Fisher information about
-the particle’s position, and indirectly about elapsed time through the
-diffusive growth of spatial uncertainty. Crucially, the effective information
-gain per detection depends on the current localization uncertainty, which
-itself evolves as information accumulates.
+Each detection event contributes finite Fisher information about the
+particle position and, indirectly, about elapsed time through the
+diffusive growth of spatial uncertainty. Crucially, the Fisher
+information gained per detection depends on the instantaneous
+localization uncertainty, which itself evolves due to diffusion and
+measurement backaction.
 
-Operationally, the accumulated Fisher information about time can be written as
+Operationally, the accumulated Fisher information about time can be
+written as
 \begin{equation}
 \FI_T(t)
 \;=\;
 \int_0^T \DistRate(t')\,dt' ,
 \end{equation}
-where the instantaneous distinguishability rate $\DistRate$ is bounded by the
-photon flux $\Flux$ and suppressed when the diffusive spread
-$\sqrt{2Dt'}$ becomes large compared to the measurement resolution
-$\sigma_m$. This feedback between diffusion-driven uncertainty growth and
-measurement-driven uncertainty reduction is the essential mechanism.
+where $\DistRate(t')$ is the instantaneous distinguishability rate.
+This rate is bounded by the photon flux $\Flux$ and suppressed when the
+diffusive spread $\sqrt{2Dt'}$ exceeds the measurement resolution
+$\sigma_m$. The feedback between diffusion-induced uncertainty growth
+and measurement-induced uncertainty reduction is the central mechanism
+governing the scaling.
 
-\subsection{Self-consistent localization and scaling law}
+\subsection{Self-consistent localization and scaling}
 
-The inference problem closes through a self-consistency condition. At short
-times, diffusion broadens the position distribution as $\sqrt{2Dt}$, while
-measurements reduce uncertainty at a rate proportional to the photon flux
-$\Flux$. The minimal resolvable time scale is determined by the point at which
-the rate of information extraction balances the rate at which new uncertainty
-is injected by diffusion.
+The inference problem closes through a self-consistency condition.
+Diffusion increases spatial uncertainty as $\sqrt{2Dt}$, while
+measurements reduce uncertainty at a rate proportional to the photon
+flux $\Flux$. The minimal resolvable time scale corresponds to a
+fixed point at which information extraction balances uncertainty
+generation.
 
 \begin{theorem}[Self-consistent diffusion scaling]
 \label{thm:phi_minus_one_third}
-Consider normal diffusion observed through a Poissonian detection channel with
-flux $\Flux$ and finite spatial resolution $\sigma_m$.
-Under the assumptions of local distinguishability geometry and finite-rate
-information accumulation, the minimal operationally resolvable time scale obeys
+Consider normal diffusion observed through a Poisson-limited channel
+with flux $\Flux$ and spatial resolution $\sigma_m$.
+Under assumptions (C1)--(C3) and local distinguishability geometry,
+the minimal operationally resolvable time scale satisfies
 \begin{equation}
 \delta t_{\min}
 \;\sim\;
@@ -77,77 +83,82 @@ information accumulation, the minimal operationally resolvable time scale obeys
 \end{theorem}
 
 \paragraph{Assumptions.}
-(i) Poissonian (i.i.d.) detection statistics with finite flux $\Flux$;  
-(ii) Gaussian measurement noise with fixed width $\sigma_m$;  
-(iii) validity of local (quadratic) Fisher-information geometry;  
-(iv) existence of a self-consistent fixed point where information gain and
-diffusion-induced uncertainty balance.
+\begin{itemize}
+\item[(A1)] Poissonian detection with finite flux $\Flux$;
+\item[(A2)] Gaussian measurement noise of fixed width $\sigma_m$;
+\item[(A3)] validity of local (quadratic) Fisher-information geometry;
+\item[(A4)] existence of a self-consistent fixed point where diffusion
+and information gain balance.
+\end{itemize}
 
 \paragraph{Proof sketch.}
-The proof follows a fixed-point argument. Diffusion increases spatial
-uncertainty as $\sqrt{2Dt}$, reducing the Fisher information extractable per
-detection, while measurements reduce uncertainty at a rate proportional to
-$\Flux$. Equating these competing rates yields the cubic-root scaling.
-A detailed derivation is provided in Appendix~A.
+Diffusion increases localization uncertainty as $\sqrt{2Dt}$, reducing
+the Fisher information per detection, while measurements decrease
+uncertainty at a rate proportional to $\Flux$.
+Equating the diffusion-induced growth of uncertainty with the
+measurement-induced reduction yields a fixed-point condition.
+Solving this condition produces the cubic-root scaling.
+A detailed derivation is given in Appendix~A.
 \hfill$\square$
 
-\paragraph{Status.}
-Theorem~\ref{thm:phi_minus_one_third} is epistemic: it constrains achievable time
-resolution under the specified observation channel. It does not assert any
-fundamental discreteness or granularity of time itself.
+\paragraph{Interpretation.}
+Theorem~\ref{thm:phi_minus_one_third} is epistemic.
+It constrains achievable time resolution under the specified
+observation channel and does not imply any intrinsic granularity or
+discreteness of time.
 
-\subsection{Numerical evidence}
+\subsection{Numerical validation}
 
-The $\Flux^{-1/3}$ scaling is confirmed by Monte Carlo simulations combining
-explicit diffusive trajectories with Poisson detection and Gaussian measurement
-noise. The frozen Evidence Pack yields a fitted slope consistent with $-1/3$
-over multiple decades in $\Flux$ (Figure~\ref{fig:phi_scaling}).
+The $\Flux^{-1/3}$ scaling is confirmed by Monte Carlo simulations
+combining explicit diffusive trajectories with Poisson detection and
+Gaussian measurement noise. The frozen Evidence Pack yields fitted
+slopes consistent with $-1/3$ across multiple decades in $\Flux$
+(Figure~\ref{fig:phi_scaling}).
 
-Robustness against statistical fluctuations and finite-$\Flux$ effects is
-demonstrated by multi-seed slope statistics
-(Figure~\ref{fig:phi_hist}). All numerical protocols and random seeds are fixed
-and documented (Appendices~D and~E).
+Robustness against statistical fluctuations and finite-$\Flux$ effects
+is demonstrated by multi-seed slope statistics
+(Figure~\ref{fig:phi_hist}). All numerical protocols and random seeds
+are fixed and documented (Appendices~D and~E).
 
-\subsection{Regime of validity and finite-$\Flux$ systematics}
+\subsection{Regime of validity}
 
-The $\Flux^{-1/3}$ law holds in the inference-limited regime where:
-(i) photon statistics are Poissonian,
-(ii) the observation time is sufficient to reach the self-consistent fixed
-point, and
-(iii) systematic effects such as drift or miscalibration are negligible.
-
-Deviations from the predicted scaling diagnose either finite-resource
-(pre-asymptotic) effects or violations of the assumed observation channel, rather
-than a breakdown of diffusion dynamics. Such deviations therefore act as
-diagnostic signals rather than evidence for ontological limits.
+The scaling law holds in the inference-limited regime where:
+\begin{itemize}
+\item[(R1)] photon statistics are Poissonian;
+\item[(R2)] observation times are sufficient to reach the
+self-consistent fixed point;
+\item[(R3)] systematic effects (drift, miscalibration) are negligible.
+\end{itemize}
+Deviations from the predicted scaling diagnose finite-resource
+(pre-asymptotic) effects or violations of the assumed observation
+channel, not a failure of diffusive dynamics.
 
 \paragraph{Falsifiability.}
-Persistent experimental observation of a scaling steeper than $\Flux^{-1/3}$
-under the stated channel assumptions would falsify
-Theorem~\ref{thm:phi_minus_one_third} and, by extension, the rate-limited
-hypothesis for this setting.
+Observation of a scaling steeper than $\Flux^{-1/3}$ under assumptions
+(C1)--(C3) would falsify
+Theorem~\ref{thm:phi_minus_one_third} and the rate-limited hypothesis in
+this setting.
 
-\subsection{Connection to anomalous diffusion}
+\subsection{Extension to anomalous diffusion}
 
-The same self-consistency logic extends to anomalous diffusion with
-$\mathrm{MSD}\sim t^\alpha$, yielding the generalized scaling
-$\delta t_{\min}\propto\Flux^{-1/(2+\alpha)}$.
-This generalization is derived in Appendix~B and supported numerically by the
-CTRW $\alpha$-sweep
-(Figure~\ref{fig:ctrw_alpha}). The normal diffusion case analyzed here
-corresponds to $\alpha=1$ and serves as the baseline against which anomalous
-transport regimes are compared.
+The same self-consistent logic applies to anomalous transport with
+mean-squared displacement $\mathrm{MSD}(t)\sim t^\alpha$.
 
 \begin{theorem}[Anomalous diffusion / CTRW generalization]
 \label{thm:ctrw_generalization}
-Assume anomalous transport with mean-squared displacement $\mathrm{MSD}(t)\sim t^\alpha$
-for $0<\alpha<2$ under the same Poisson-limited observation channel as above.
-Then the self-consistent inference logic yields the generalized scaling law
+Assume anomalous transport with $\mathrm{MSD}(t)\sim t^\alpha$ for
+$0<\alpha<2$ under the same Poisson-limited observation channel.
+Then the minimal operationally resolvable time scale obeys
 \begin{equation}
 \delta t_{\min}\;\propto\;\Flux^{-1/(2+\alpha)}.
 \end{equation}
 \end{theorem}
 
+\paragraph{Status.}
+Theorem~\ref{thm:ctrw_generalization} is epistemic.
+It reduces to Theorem~\ref{thm:phi_minus_one_third} for $\alpha=1$ and is
+derived formally in Appendix~B, with numerical support from the CTRW
+$\alpha$-sweep (Figure~\ref{fig:ctrw_alpha}).
 
 % ============================================================
 % End of sections/04_classical_diffusion.tex

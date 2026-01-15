@@ -1,0 +1,93 @@
+% ============================================================
+% sections/06b_related_work.tex
+% ============================================================
+
+\section{Relation to Existing Approaches}
+\label{sec:related_work}
+
+This section positions Distinguishability-Rate Theory (DRT) with respect to
+established approaches in estimation theory, quantum metrology, continuous
+monitoring, and foundational discussions.
+The purpose is not to provide a comprehensive literature review, but to clarify
+scope, reuse, and non-claims.
+
+\subsection{Classical estimation theory}
+
+Classical estimation theory provides a rigorous framework for bounding estimation
+error given an assumed statistical model.
+Canonical results include the Cramér--Rao bound, its Bayesian extensions, and
+local asymptotic normality (e.g.\ the work of Kay, Van Trees, and Le Cam).
+These results characterize the achievable precision \emph{conditional on} a
+given Fisher information.
+
+DRT does not modify these bounds.
+Instead, it addresses a complementary question not formulated in classical
+estimation theory: which Fisher information values are operationally achievable
+under finite-rate observation.
+In this sense, DRT treats Fisher information not as an input, but as an object
+constrained by the observation process itself.
+
+\subsection{Quantum metrology}
+
+Quantum metrology extends estimation theory to quantum states and measurements,
+introducing the quantum Fisher information and bounds due to Helstrom and Holevo.
+In idealized settings, these results identify ultimate precision limits under
+optimal measurements.
+
+A substantial body of work has shown that in realistic settings---including
+noise, decoherence, and continuous monitoring---quantum Fisher information
+accumulation is strongly suppressed and often saturates.
+DRT does not contest these results.
+Rather, it provides a unifying operational interpretation: such limits arise from
+rate constraints on distinguishability accumulation and are therefore epistemic
+within the declared observation channel.
+
+Importantly, DRT does not claim new quantum limits.
+It provides a diagnostic criterion for determining when a claimed quantum bound
+reflects inference limitations rather than non-epistemic structure.
+
+\subsection{Continuous monitoring and non-i.i.d.\ inference}
+
+Many physical inference problems involve continuous-time measurements, correlated
+noise, or non-i.i.d.\ data streams.
+Filtering theory and stochastic process methods describe how information is
+distributed across time and correlations in such settings.
+
+DRT builds on these insights by treating distinguishability rate as a primitive
+operational quantity.
+This perspective clarifies why, for example, parameters in Ornstein--Uhlenbeck
+processes are identifiable only through temporal correlations and why no amount
+of snapshot sampling suffices.
+The contribution of DRT is not a new filtering method, but an explicit rate-based
+bound that unifies such observations across models.
+
+\subsection{Foundational interpretations}
+
+Operational bounds on time, phase, or parameter resolution are often interpreted
+as statements about the fundamental structure of physical reality.
+DRT explicitly refrains from such interpretations.
+
+Within the framework introduced here, inference-limited bounds are epistemic:
+they arise from local distinguishability geometry and finite information rates.
+Persistent constraints that do not relax under epistemic exhaustion are treated
+separately as non-epistemic residues within a fixed observation channel class.
+DRT does not explain or derive such structures; it identifies the point at which
+inference-based reasoning ceases to apply.
+
+\subsection{Summary of scope}
+
+In summary, DRT:
+\begin{itemize}
+\item reuses standard estimation-theoretic and quantum-metrological results,
+\item reinterprets many resolution limits as consequences of finite
+distinguishability rates,
+\item introduces no new dynamical or ontological assumptions, and
+\item provides an operational criterion for separating inference-limited bounds
+from non-epistemic constraints.
+\end{itemize}
+
+Claims beyond this scope are intentionally excluded.
+
+% ============================================================
+% End of sections/06b_related_work.tex
+% ============================================================

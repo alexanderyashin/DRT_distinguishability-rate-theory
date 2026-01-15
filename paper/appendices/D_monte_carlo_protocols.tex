@@ -1,1 +1,145 @@
-\input{../appendices/D_monte_carlo_protocols}
+% ============================================================
+% appendices/D_monte_carlo_protocols.tex  (FULL REPLACEMENT)
+% ============================================================
+
+\section{Monte Carlo Protocols and Reproducibility}
+\label{app:monte_carlo}
+
+This appendix documents the numerical protocols underlying all
+simulation-based results in the paper.
+Its role is \emph{strictly confirmatory}: no simulation output is used to
+formulate, motivate, tune, or select analytic claims.
+All numerical studies serve exclusively to verify rate-limited scalings
+derived independently in the main text.
+
+\subsection{Design principles}
+
+All Monte Carlo (MC) studies in this work adhere to the following
+non-negotiable principles:
+
+\begin{enumerate}
+\item \textbf{Model-first specification.}
+All stochastic dynamics, observation channels, and target parameters are
+fully specified analytically before any simulation is executed.
+
+\item \textbf{A priori parameter fixing.}
+Physical, statistical, and measurement parameters are fixed in advance and
+documented.
+No post-hoc adjustment, tuning, or optimization based on simulation outcomes
+is permitted.
+
+\item \textbf{Decision-based extraction.}
+Operational resolution scales are extracted exclusively via the fixed
+decision criterion defined in Eq.~\eqref{eq:decision_threshold}.
+Neither visual inspection nor heuristic fitting is used to define resolution.
+
+\item \textbf{Deterministic analysis pipeline.}
+Given stored random seeds and simulation outputs, all analysis and figures
+are generated deterministically by scripted procedures.
+
+\item \textbf{Unidirectional data flow.}
+Simulation, analysis, and visualization are implemented in separate scripts
+with a strict one-way dependency structure.
+Raw outputs are never overwritten.
+\end{enumerate}
+
+These principles enforce a sharp separation between theory and numerical
+verification and prevent circular inference.
+
+\subsection{Normal diffusion simulations}
+
+For normal diffusion, particle trajectories are generated as discrete-time
+approximations to Brownian motion with diffusion coefficient $D$.
+Photon detections are generated as a Poisson point process with flux $\Flux$.
+Each detection yields a position measurement corrupted by Gaussian noise with
+standard deviation $\sigma_m$.
+
+For each fixed parameter triple $(D,\Flux,\sigma_m)$, an ensemble of
+independent trajectories is simulated.
+The minimal resolvable time scale $\delta t_{\min}$ is extracted by explicit
+application of the operational decision criterion
+(Eq.~\eqref{eq:decision_threshold}), rather than by curve fitting or visual
+inspection.
+
+Power-law exponents are obtained via linear regression on log--log axes over
+an asymptotic regime selected by a fixed, rule-based criterion (minimum flux
+and observation-time thresholds).
+The same criterion is applied uniformly across all parameter sets.
+
+\paragraph{Outputs.}
+Simulation outputs are stored as structured JSON files in the
+\texttt{results/} directory and are never overwritten.
+Figures~\ref{fig:phi_scaling} and~\ref{fig:phi_hist} are generated exclusively
+from these stored artifacts.
+
+\subsection{Anomalous diffusion (CTRW)}
+
+Anomalous diffusion is modeled using continuous-time random walks (CTRW) with
+heavy-tailed waiting-time distributions, yielding
+$\mathrm{MSD}\sim t^\alpha$.
+Trajectories are generated via inverse-transform sampling for waiting times
+and Gaussian jump distributions.
+
+Extraction of $\delta t_{\min}$ and scaling exponents follows the identical
+decision-based pipeline used for normal diffusion.
+Numerical slopes are compared directly against the predicted exponent
+$-1/(2+\alpha)$ with no adjustable parameters.
+Results are summarized in Appendix~B and Figure~\ref{fig:ctrw_alpha}.
+
+\subsection{Continuous monitoring and OU processes}
+
+For the Ornstein--Uhlenbeck process, trajectories are generated using exact
+discretization schemes to avoid time-step artifacts.
+Inference of the relaxation rate $\gamma$ is performed using estimators based
+on temporal correlations, in accordance with the Fisher-information analysis
+of Section~\ref{sec:continuous_monitoring}.
+
+Accumulated Fisher information is computed as a function of observation time
+$T$, and the inferred resolution is compared directly against the analytic
+bound in Eq.~\eqref{eq:ou_bound}.
+Numerical results are summarized in Figure~\ref{fig:ou}.
+
+\subsection{Quantum interferometric simulations}
+
+Ramsey and Mach--Zehnder interferometric scenarios are simulated using
+effective models for visibility loss and decoherence.
+Quantum Fisher information is computed either analytically (when closed-form
+expressions are available) or numerically from the parameter dependence of
+simulated outcome distributions, following standard QFI constructions.
+
+Meeting-point behavior between inference-limited and dynamical or geometric
+scales is extracted without fitted parameters.
+Figures~\ref{fig:ramsey}--\ref{fig:noise} visualize these comparisons.
+
+\subsection{Random seeds and numerical determinism}
+
+All simulations employ explicit random seeds recorded in the corresponding
+JSON outputs.
+Re-running the full pipeline with identical inputs reproduces all figures
+within floating-point tolerance.
+Platform-dependent roundoff differences do not affect extracted scaling
+exponents or regime classification.
+
+\subsection{One-command reproducibility}
+
+All numerical results and figures can be regenerated from a clean environment
+via the command sequence:
+\begin{verbatim}
+make setup
+make sims
+make figs
+make pdf
+\end{verbatim}
+The build process is documented in the project \texttt{Makefile} and contains
+no interactive steps.
+
+\subsection{Explicit non-claims}
+
+Monte Carlo simulations are not used to discover scaling laws, define bounds,
+select theoretical models, or justify ontological claims.
+Their sole function is independent verification of analytically derived,
+rate-limited predictions and illustration of regimes of validity.
+
+% ============================================================
+% End of appendices/D_monte_carlo_protocols.tex
+% ============================================================

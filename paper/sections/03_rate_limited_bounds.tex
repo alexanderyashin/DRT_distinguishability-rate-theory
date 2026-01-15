@@ -1,1 +1,224 @@
-\input{../sections/03_rate_limited_bounds}
+% ============================================================
+% sections/03_rate_limited_bounds.tex
+% ============================================================
+
+\section{Rate-Limited Bounds}
+\label{sec:rate_limited_bounds}
+
+This section establishes the formal core of Distinguishability-Rate Theory (DRT).
+All results here are \emph{epistemic}: they follow solely from operational
+distinguishability, fixed decision thresholds, and upper bounds on information
+accumulation rates.
+No assumptions about microscopic dynamics are made beyond what is encoded in the
+observation channel and its distinguishability-rate envelope.
+
+\subsection{Decision thresholds and operational resolution}
+
+We recall the operational decision criterion introduced in
+Section~\ref{sec:operational_framework}:
+\begin{equation}
+\delta\theta^{\mathsf T}\,\FI_T(\theta)\,\delta\theta
+\;\ge\;
+2\Dstar ,
+\label{eq:rl_decision}
+\end{equation}
+where $\FI_T(\theta)$ denotes the (classical or quantum) Fisher information
+accumulated over an observation window $T$, and $\Dstar>0$ is a fixed decision
+threshold.
+For a given $\FI_T(\theta)$, this criterion defines the minimal operationally
+resolvable parameter scale $\delta\theta_{\min}$.
+
+Rather than assuming $\FI_T(\theta)$ as given and bounding estimation error, DRT
+asks which values of $\FI_T(\theta)$ are \emph{operationally achievable} under
+finite-rate observation.
+
+\subsection{Distinguishability-rate representation}
+
+For any observation channel admitting local quadratic distinguishability, the
+accumulated Fisher information can be written as
+\begin{equation}
+\FI_T(\theta)
+\;=\;
+\int_0^T \DistRate(t;\theta)\,dt ,
+\end{equation}
+where $\DistRate(t;\theta)$ is the instantaneous distinguishability rate.
+No assumption of independent or identically distributed sampling is required.
+All subsequent bounds arise from constraints on $\DistRate(t;\theta)$.
+
+\subsection{Master inequality}
+
+\begin{proposition}[Master inequality for rate-limited inference]
+\label{prop:master_inequality}
+Let $\theta$ be a parameter inferred through an observation channel with
+accumulated Fisher or quantum Fisher information $\FI_T(\theta)$.
+Assume that the distinguishability rate obeys an envelope
+\begin{equation}
+\DistRate(t;\theta)
+\;\le\;
+\DistRateMax(t)
+\qquad
+\text{for all } t\in[0,T],
+\end{equation}
+where $\DistRateMax(t)$ is fixed by the observation channel.
+Then the minimal operationally resolvable scale along any direction $u$ satisfies
+\begin{equation}
+\delta\theta_{\min}(T)
+\;\ge\;
+\sqrt{
+\frac{2\Dstar}{
+\displaystyle \int_0^T \DistRateMax(t)\,dt
+}
+}.
+\label{eq:rate_limited_bound}
+\end{equation}
+\end{proposition}
+
+\paragraph{Assumptions.}
+\begin{itemize}
+\item[(A1)] Local (quadratic) distinguishability geometry holds in the relevant
+regime.
+\item[(A2)] A fixed decision threshold $\Dstar$ is chosen.
+\item[(A3)] The observation channel admits an empirically characterizable upper
+envelope $\DistRateMax(t)$ on distinguishability accumulation.
+\end{itemize}
+
+\paragraph{Proof (direct).}
+By definition,
+$\FI_T(\theta)=\int_0^T \DistRate(t;\theta)\,dt
+\le \int_0^T \DistRateMax(t)\,dt$.
+Insertion into the decision criterion~\eqref{eq:rl_decision} yields
+Eq.~\eqref{eq:rate_limited_bound}.
+\hfill$\square$
+
+\paragraph{Interpretation.}
+Proposition~\ref{prop:master_inequality} bounds not estimation error at fixed
+information, but the \emph{achievable accumulation} of Fisher information itself
+under finite-rate observation.
+This inversion of the usual estimation-theoretic logic is central to DRT and
+should not be confused with a reformulation of the Cramér--Rao bound.
+
+\paragraph{Falsifiability.}
+The proposition is falsified by demonstrating sustained accumulation of Fisher or
+quantum Fisher information exceeding the envelope $\DistRateMax(t)$ within the
+declared observation channel.
+
+\subsection{Noise-suppressed accumulation}
+
+In many experimental settings, distinguishability rates are suppressed by noise or
+decoherence.
+A generic envelope is
+\begin{equation}
+\DistRate(t;\theta)
+\;\le\;
+\DistRateIdeal(t)\,e^{-2\Gamma t},
+\label{eq:noise_envelope}
+\end{equation}
+where $\Gamma$ is an effective noise or decoherence rate.
+Integration yields
+\begin{equation}
+\FI_T(\theta)
+\;\le\;
+\int_0^T
+\DistRateIdeal(t)\,e^{-2\Gamma t}\,dt .
+\end{equation}
+
+\begin{proposition}[Noise-limited inference saturation]
+\label{prop:noise_limited}
+If $\DistRateIdeal(t)$ is integrable on $[0,\infty)$, then
+$\FI_T(\theta)$ converges to a finite value as $T\to\infty$.
+Consequently, $\delta\theta_{\min}$ admits a nonzero lower bound even for
+arbitrarily long observation times.
+\end{proposition}
+
+\paragraph{Interpretation.}
+This saturation is epistemic.
+It reflects exhaustion of information extractable through a noisy observation
+channel, not intrinsic discreteness or stochasticity of the parameter $\theta$.
+
+\subsection{Universality and dynamics-independence}
+
+A defining feature of DRT is that operational resolution bounds depend only on
+coarse, operationally accessible features of the observation channel.
+
+\begin{lemma}[Dynamics-independence]
+\label{lem:dynamics_independence}
+Within a fixed observation channel class, two systems with distinct microscopic
+dynamics but identical distinguishability-rate envelopes
+$\DistRateMax(t)$ yield identical operational resolution bounds under DRT.
+\end{lemma}
+
+\paragraph{Operational content.}
+Lemma~\ref{lem:dynamics_independence} is not a statement about microscopic
+equivalence.
+Its nontrivial content is that the envelope $\DistRateMax(t)$ is an
+\emph{operationally characterizable quantity}, extractable from observable
+statistics without access to underlying dynamics.
+All microscopic details influence DRT bounds only insofar as they affect this
+envelope.
+
+\subsection{Regime Map and Validity Domains}
+\label{sec:regime_map}
+
+The bounds derived above apply within clearly defined operational regimes:
+
+\begin{itemize}
+\item \textbf{i.i.d.\ versus non-i.i.d.}
+The master inequality holds without independence assumptions.
+However, in non-i.i.d.\ continuous monitoring, Fisher information may reside
+primarily in temporal correlations rather than in marginal statistics
+(Section~\ref{sec:continuous_monitoring}).
+
+\item \textbf{Asymptotic versus finite-resource regimes.}
+Scaling laws derived from Eq.~\eqref{eq:rate_limited_bound} may fail at finite
+$\Flux$, $N$, or $T$.
+Such deviations are diagnostic of pre-asymptotic inference, not violations of the
+bound.
+
+\item \textbf{Noise- and decoherence-limited saturation.}
+When distinguishability rates are exponentially suppressed, information
+accumulation saturates and operational resolution ceases to improve with time
+(Proposition~\ref{prop:noise_limited}).
+
+\item \textbf{Classical, quantum-reducible, and ontological-residual regimes.}
+All bounds in this section are reducible to Fisher or quantum Fisher geometry.
+Resolution limits that persist after all reasonable rate constraints are relaxed
+within a fixed channel class indicate the presence of non-epistemic structure and
+are treated separately in
+Section~\ref{sec:ontological_residues}.
+\end{itemize}
+
+\paragraph{Falsifiability hooks.}
+For each regime, falsification requires controlled modification of the observation
+channel or resource budget.
+Observation of distinguishability accumulation exceeding the declared rate
+envelopes would invalidate the corresponding DRT description.
+
+\subsection{Inference-limited versus dynamics-limited regimes}
+
+The master inequality~\eqref{eq:rate_limited_bound} defines two operational
+regimes:
+\begin{itemize}
+  \item \textbf{Inference-limited regimes,} in which
+  $\int_0^T \DistRateMax(t)\,dt$ grows too slowly for intrinsic dynamical scales to
+  be resolved.
+  \item \textbf{Dynamics-limited regimes,} in which information accumulation is
+  sufficiently rapid that intrinsic geometric or dynamical scales dominate.
+\end{itemize}
+Meeting-point diagrams in
+Sections~\ref{sec:classical_diffusion} and
+\ref{sec:quantum_systems} visualize the crossover.
+
+\subsection{Scope and boundary of applicability}
+
+All bounds derived in this section are Fisher or quantum Fisher reducible and are
+therefore epistemic in the sense of
+Section~\ref{sec:definitions_criterion}.
+If a resolution limit persists after all reasonable distinguishability-rate
+constraints are relaxed within a fixed channel class, additional global or
+algebraic structure is required.
+Such cases are treated explicitly in
+Section~\ref{sec:ontological_residues}.
+
+% ============================================================
+% End of sections/03_rate_limited_bounds.tex
+% ============================================================

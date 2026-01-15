@@ -1,1 +1,161 @@
-\input{../appendices/C_fisher_qfi_technicalities}
+% ============================================================
+% appendices/C_fisher_qfi_technicalities.tex  (FULL REPLACEMENT)
+% ============================================================
+
+\section{Fisher and Quantum Fisher Information: Technical Background}
+\label{app:fisher_qfi}
+
+This appendix collects the technical foundations underlying the
+distinguishability-rate formalism used throughout the paper.
+Its role is purely formal: to render all claims involving Fisher
+information (FI), quantum Fisher information (QFI), and their operational
+interpretation explicit, precise, and reviewer-verifiable, without
+interrupting the main text.
+
+\subsection{Classical Fisher information}
+
+Let $Y$ denote an observation drawn from a probability density
+$p(y|\theta)$ depending smoothly on a parameter $\theta$.
+The (classical) Fisher information is defined as
+\begin{equation}
+\FI(\theta)
+\;=\;
+\mathbb{E}_\theta\!\left[
+\left(\partial_\theta \ln p(Y|\theta)\right)^2
+\right].
+\end{equation}
+Operationally, $\FI(\theta)$ defines the local quadratic form governing
+the statistical distinguishability of nearby parameter values.
+
+For $N$ independent and identically distributed observations,
+Fisher information is additive,
+\begin{equation}
+\FI_N(\theta) = N\,\FI_1(\theta).
+\end{equation}
+This additivity holds only in the \iid\ regime and is not assumed
+elsewhere in the paper.
+
+\subsection{Decision threshold and operational resolution}
+
+Throughout, operational resolution is defined relative to a fixed,
+dimensionless distinguishability threshold $\Dstar$.
+A parameter offset $\delta\theta$ is said to be operationally resolvable
+when
+\begin{equation}
+\delta\theta^2\, \FI_T(\theta) \;\ge\; 2\Dstar ,
+\label{eq:decision_threshold_app}
+\end{equation}
+where $\FI_T(\theta)$ denotes the Fisher information accumulated over an
+observation window of duration $T$.
+
+The numerical value of $\Dstar$ encodes the chosen decision rule
+(e.g.\ fixed error probability or likelihood-ratio threshold).
+Changing $\Dstar$ rescales $\delta\theta_{\min}$ by a constant factor
+only and does not affect scaling exponents, regime classification, or
+falsifiability.
+
+\subsection{Information accumulation rate}
+
+In non-\iid\ or continuous-monitoring settings, Fisher information may
+accumulate continuously in time. When applicable, we write
+\begin{equation}
+\FI_T(\theta)
+\;=\;
+\int_0^T \dot{\FI}(t;\theta)\,dt ,
+\end{equation}
+where $\dot{\FI}(t;\theta)$ denotes an \emph{information accumulation
+rate envelope}.
+
+Crucially, $\dot{\FI}$ is not assumed to be a fundamental dynamical
+quantity. It represents an upper bound on the rate at which
+distinguishability can be extracted from the observation channel.
+Noise, finite bandwidth, correlations, or decoherence suppress
+$\dot{\FI}$ and thereby impose operational limits even for arbitrarily
+long observation times.
+
+\subsection{Quantum Fisher information}
+
+For a smooth family of quantum states $\rho_\theta$, the quantum Fisher
+information $\QFI(\theta)$ is defined by
+\begin{equation}
+\QFI(\theta)
+\;=\;
+\mathrm{Tr}\!\left[\rho_\theta L_\theta^2\right],
+\end{equation}
+where the symmetric logarithmic derivative $L_\theta$ satisfies
+\begin{equation}
+\partial_\theta \rho_\theta
+\;=\;
+\frac{1}{2}\left(L_\theta \rho_\theta + \rho_\theta L_\theta\right).
+\end{equation}
+Equivalently, $\QFI(\theta)$ is the supremum of classical Fisher
+information over all admissible POVMs.
+
+\paragraph{Accumulated QFI.}
+To avoid ambiguity between local and time-integrated quantities, we
+denote by $\mathcal{I}^{(Q)}_T(\theta)$ the \emph{accumulated} quantum
+Fisher information available after an observation protocol of duration
+$T$.
+The operational decision bound becomes
+\begin{equation}
+\delta\theta_{\min}
+\;\ge\;
+\sqrt{\frac{2\Dstar}{\mathcal{I}^{(Q)}_T(\theta)}} .
+\label{eq:qcrb_app}
+\end{equation}
+Within DRT, $\mathcal{I}^{(Q)}_T$ constrains inference only and carries no
+ontological implication for $\theta$.
+
+\subsection{Multiparameter geometry}
+
+For a vector parameter $\boldsymbol{\theta}$, Fisher information
+generalizes to a positive semidefinite matrix $\FI_{ij}$.
+For a direction $u$ in parameter space, the inference-limited resolution
+scale is
+\begin{equation}
+\delta_{\mathrm{inf}}(u;T)
+\;=\;
+\sqrt{\frac{2\Dstar}{u^{\mathsf T}\FI_T u}} .
+\end{equation}
+This defines the local Fisher ellipsoid.
+Meeting-point behavior arises when this inference-limited scale matches
+a dynamical or geometric scale intrinsic to the system.
+
+\subsection{QFI under noise and decoherence}
+
+In open quantum systems, accumulated QFI is generically suppressed.
+For Markovian dephasing with rate $\Gamma$, an envelope of the form
+\begin{equation}
+\mathcal{I}^{(Q)}_T(\theta)
+\;\le\;
+\int_0^T
+\dot{\QFI}_{\mathrm{ideal}}(t)\,e^{-2\Gamma t}\,dt
+\end{equation}
+holds. This suppression leads to saturation of accumulated
+distinguishability and underlies the universal meeting-point behavior
+observed in Ramsey and Mach--Zehnder interferometry.
+
+\subsection{Fisher-reducible versus non-Fisher-reducible constraints}
+
+The central technical distinction of the paper is the following:
+\begin{itemize}
+\item \textbf{Fisher-reducible constraints} are expressible solely as
+bounds on $\FI_T$ or $\mathcal{I}^{(Q)}_T$ and vanish under epistemic
+exhaustion ($\FI_T\!\to\!\infty$).
+\item \textbf{Non-Fisher-reducible constraints} depend on global
+algebraic, compatibility, or event-structure properties and persist even
+as $\FI_T\!\to\!\infty$.
+\end{itemize}
+Only constraints of the second type qualify as ontological residues in
+the sense of Section~\ref{sec:ontological_residues}.
+
+\subsection{Scope and limitations}
+
+All FI- and QFI-based results are local in parameter space and asymptotic
+in nature. Global estimation problems, non-smooth parameterizations, and
+constraints unrelated to distinguishability geometry lie outside the
+scope of Distinguishability-Rate Theory and are not addressed here.
+
+% ============================================================
+% End of appendices/C_fisher_qfi_technicalities.tex
+% ============================================================

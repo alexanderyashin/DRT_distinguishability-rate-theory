@@ -1,1 +1,112 @@
-\input{../appendices/E_reproducibility_checklist}
+% ============================================================
+% appendices/E_reproducibility_checklist.tex  (FULL REPLACEMENT)
+% ============================================================
+
+\section{Reproducibility Checklist}
+\label{app:reproducibility}
+
+This appendix provides a concise and auditable checklist documenting the
+reproducibility status of all computational results reported in the paper.
+Its sole purpose is verification: to enable independent reproduction of all
+numerical results and figures directly from the public repository, without
+additional correspondence, clarification, or author intervention.
+
+\subsection{Repository state}
+
+\begin{itemize}
+\item All reported results correspond to a single, immutable, tagged repository
+state (\texttt{drt-paper-freeze-2026-01-14}).
+\item The Evidence Pack (all simulation outputs and generated figures) is frozen
+at this tag and not modified during manuscript preparation.
+\item All \LaTeX{} sources, simulation scripts, analysis code, build
+configuration, and auxiliary files required for reproduction are contained
+entirely within the repository.
+\item No external data sources, unpublished datasets, or private dependencies
+are required.
+\end{itemize}
+
+\subsection{Build environment}
+
+\begin{itemize}
+\item The numerical pipeline is implemented in Python using explicitly specified
+dependencies listed in the repository requirements file.
+\item Figure generation relies exclusively on precomputed simulation outputs
+stored as structured JSON artifacts.
+\item No figure is generated from live or on-the-fly simulation output during
+manuscript compilation.
+\item No proprietary software, closed-source libraries, or
+platform-specific tools are required.
+\end{itemize}
+
+\subsection{One-command reproducibility}
+
+From a clean environment, all numerical results, figures, and the manuscript PDF
+can be reproduced via the command sequence:
+\begin{verbatim}
+make setup
+make sims
+make figs
+make pdf
+\end{verbatim}
+This sequence installs all dependencies, executes all simulations, generates all
+figures, and compiles the manuscript without manual intervention or interactive
+input.
+
+\subsection{Randomness and determinism}
+
+\begin{itemize}
+\item All stochastic simulations employ explicit random seeds recorded in their
+corresponding output files.
+\item Re-running the full pipeline with identical inputs reproduces all figures
+and numerical results within floating-point tolerance.
+\item Minor platform-dependent roundoff effects or \LaTeX{} nondeterminism do not
+affect extracted scaling exponents, operational decision thresholds, or reported
+conclusions.
+\item No interactive choices, hidden parameters, manual overrides, or
+post-processing steps influence any reported result.
+\end{itemize}
+
+\subsection{Traceability and auditability}
+
+\begin{itemize}
+\item Each figure included in the manuscript corresponds to a uniquely
+identified file in the \texttt{figures/} directory.
+\item Each figure is traceable to specific raw simulation outputs stored in the
+\texttt{results/} directory.
+\item The mapping between analytic claims, simulation scripts, output artifacts,
+and manuscript sections is documented explicitly in the project
+\texttt{RUNBOOK}.
+\item Any modification of simulation parameters, analysis logic, or figure
+generation scripts would produce a detectable change in the repository state.
+\end{itemize}
+
+\subsection{Scope of reproducibility}
+
+The following elements are fully reproducible from the tagged repository state:
+
+\begin{itemize}
+\item All numerical simulations and extracted scaling exponents.
+\item All figures and tables included in the manuscript.
+\item The compiled manuscript PDF corresponding to the tagged release.
+\end{itemize}
+
+The following elements are explicitly \emph{not} claims of reproducibility:
+
+\begin{itemize}
+\item Conceptual interpretation of results.
+\item Ontological classification of bounds.
+\item Historical motivation or narrative framing.
+\end{itemize}
+
+\subsection{Integrity statement}
+
+No reported numerical result is obtained through manual tuning, selective
+reporting, adaptive parameter choice, or post-hoc adjustment.
+All figures and quantitative values reflect the direct output of the documented,
+deterministic computational pipeline.
+This checklist is intended to render any deviation from the reported results
+immediately detectable by independent inspection.
+
+% ============================================================
+% End of appendices/E_reproducibility_checklist.tex
+% ============================================================

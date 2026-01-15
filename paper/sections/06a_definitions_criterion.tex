@@ -1,0 +1,98 @@
+% ============================================================
+% sections/06a_definitions_criterion.tex
+% ============================================================
+
+\section{Operational Definitions and Diagnostic Criterion}
+\label{sec:definitions_criterion}
+
+This subsection introduces the minimal operational definitions required to
+separate inference-limited constraints from non-epistemic structural
+constraints.
+All statements in subsequent sections are explicitly scoped to the declared
+class of observation channels and distinguishability geometry.
+
+\subsection{Observation channels and distinguishability geometry}
+
+\begin{definition}[Observation channel class]
+A \emph{class of observation channels} $\mathcal{C}$ is a family of admissible
+measurement or monitoring procedures sharing:
+\begin{itemize}
+\item[(C1)] a fixed event structure (classical or quantum),
+\item[(C2)] a fixed parameterization $\theta \mapsto p(x|\theta)$ or
+$\rho(\theta)$,
+\item[(C3)] a well-defined local distinguishability geometry.
+\end{itemize}
+Throughout this work, $\mathcal{C}$ is assumed fixed unless stated otherwise.
+\end{definition}
+
+\begin{definition}[Local quadratic distinguishability]
+An observation channel class $\mathcal{C}$ is said to admit a \emph{local
+quadratic distinguishability geometry} if, for small parameter shifts,
+the statistical distance admits the expansion
+\begin{equation}
+D(\theta,\theta+d\theta)^2 = I(\theta)\, d\theta^2 + o(d\theta^2),
+\end{equation}
+where $I(\theta)$ is the (classical or quantum) Fisher information.
+\end{definition}
+
+This assumption is standard in both classical and quantum estimation theory and
+defines the scope of Fisher-reducible bounds.
+
+\subsection{Fisher-reducible constraints}
+
+\begin{definition}[Fisher-reducible constraint]
+A resolution bound $\delta\theta_{\min}(I_T)$ is \emph{Fisher-reducible} within a
+channel class $\mathcal{C}$ if it can be expressed solely as a function of the
+accumulated Fisher information $I_T$ associated with $\mathcal{C}$.
+\end{definition}
+
+Such bounds arise entirely from local distinguishability and statistical
+inference, independently of global structural features.
+
+\subsection{Epistemic exhaustion}
+
+\begin{definition}[Epistemic exhaustion]
+A Fisher-reducible resolution bound is said to admit \emph{epistemic exhaustion}
+within $\mathcal{C}$ if
+\begin{equation}
+\lim_{I_T \to \infty} \delta\theta_{\min}(I_T) = 0,
+\end{equation}
+while the observation channel class $\mathcal{C}$ and its event structure remain
+fixed.
+\end{definition}
+
+Epistemic exhaustion corresponds to the idealized limit of unbounded resources
+applied to the same observation model.
+
+\begin{lemma}[Closure under epistemic exhaustion]
+\label{lem:closure}
+Within a fixed channel class $\mathcal{C}$, epistemic operations---including
+increased statistics, reduced noise, or optimized estimators---can only relax
+Fisher-reducible constraints and cannot modify the underlying event structure.
+\end{lemma}
+
+\paragraph{Remark.}
+Lemma~\ref{lem:closure} explicitly excludes changes of channel class.
+Statements beyond this scope are not addressed by DRT.
+
+\subsection{Operational diagnostic criterion}
+
+\begin{theorem}[Operational diagnostic criterion]
+\label{thm:operational_criterion}
+Within a fixed observation channel class $\mathcal{C}$:
+\begin{itemize}
+\item[(i)] if a constraint vanishes under epistemic exhaustion, it is epistemic;
+\item[(ii)] if a constraint persists under epistemic exhaustion and cannot be
+expressed as a Fisher-reducible bound, it reflects non-epistemic structure within
+$\mathcal{C}$.
+\end{itemize}
+\end{theorem}
+
+\paragraph{Scope.}
+Theorem~\ref{thm:operational_criterion} is purely operational.
+It does not assert global ontological claims and does not compare different
+channel classes.
+
+% ============================================================
+% End of sections/06a_definitions_criterion.tex
+% ============================================================

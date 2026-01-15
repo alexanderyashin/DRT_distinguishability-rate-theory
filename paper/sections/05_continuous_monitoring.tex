@@ -1,1 +1,151 @@
-\input{../sections/05_continuous_monitoring}
+% ============================================================
+% sections/05_continuous_monitoring.tex  (FULL REPLACEMENT)
+% ============================================================
+
+\section{Continuous Monitoring}
+\label{sec:continuous_monitoring}
+
+Sections~\ref{sec:rate_limited_bounds} and
+\ref{sec:classical_diffusion} addressed inference from discrete or effectively
+\iid\ detection events. Many experimentally relevant scenarios, however, involve
+\emph{continuous monitoring}, where information about a parameter is encoded
+primarily in temporal correlations rather than in independent samples.
+This section formalizes such intrinsically \noniid\ regimes within DRT.
+
+\subsection{Correlated inference as a distinct regime}
+
+In continuous monitoring, the observation channel produces a stochastic time
+series $Y(t)$ whose samples are correlated. Consequently, Fisher information about
+a parameter $\theta$ is generally \emph{not} determined by marginal distributions
+alone. It resides in joint statistics and, in particular, in temporal correlation
+functions.
+
+Operationally, this implies that information accumulation is constrained by the
+intrinsic correlation structure of the process. Treating correlated data streams
+as \iid\ samples overestimates achievable resolution. DRT therefore treats
+continuous monitoring as a distinct inference regime rather than as a limiting
+case of \iid\ sampling.
+
+\subsection{Ornstein--Uhlenbeck dynamics as a canonical model}
+
+A minimal analytically tractable example is the stationary
+Ornstein--Uhlenbeck (OU) process,
+\begin{equation}
+dX_t = -\gamma X_t\,dt + \sqrt{2D}\,dW_t ,
+\end{equation}
+where $\gamma>0$ is the relaxation rate and $D$ sets the noise strength.
+We consider continuous observation of $X_t$ over a time window $T$, with the goal
+of inferring $\gamma$.
+
+\begin{lemma}[Marginal identifiability no-go for stationary OU]
+\label{lem:ou_marginal_nogo}
+Consider the stationary OU process with unknown diffusion strength $D$ treated as
+a nuisance parameter. If inference is restricted to \emph{single-time} (marginal)
+statistics of $X_t$ (i.e., ignoring temporal ordering and correlations), then
+$\gamma$ is not identifiable: the marginal distribution determines only the ratio
+$D/\gamma$ and cannot operationally fix the correlation time $\gamma^{-1}$.
+Equivalently, all operationally usable information about the \emph{rate} $\gamma$
+resides in temporal correlations.
+\end{lemma}
+
+\paragraph{Assumptions.}
+\begin{itemize}
+\item[(O1)] Stationary OU dynamics;
+\item[(O2)] inference uses only the single-time marginal of $X_t$
+(unordered samples; no temporal correlations);
+\item[(O3)] $D$ is not assumed known a priori (nuisance parameter).
+\end{itemize}
+
+\paragraph{Proof sketch.}
+In stationarity, $X_t$ is Gaussian with mean $0$ and variance $\mathrm{Var}(X_t)=D/\gamma$.
+Therefore, the marginal distribution depends on parameters only through the
+combination $D/\gamma$. Without additional information fixing $D$, the mapping
+$(\gamma,D)\mapsto D/\gamma$ is many-to-one, so $\gamma$ cannot be identified from
+single-time statistics alone. By contrast, the autocorrelation function
+$\langle X_t X_{t+\tau}\rangle = (D/\gamma)\,e^{-\gamma \tau}$ contains a distinct
+timescale $\gamma^{-1}$, making $\gamma$ accessible through temporal correlations.
+\hfill$\square$
+
+\paragraph{Interpretation.}
+Lemma~\ref{lem:ou_marginal_nogo} is a precise no-go statement for this non-\iid\
+regime: marginal statistics can fix a stationary \emph{scale} (here $D/\gamma$),
+but not the \emph{rate} $\gamma$ that governs correlation decay. This is the
+operational sense in which ``time is in correlations''.
+
+\subsection{Correlation-limited information accumulation}
+
+Because information resides in correlations, distinguishability accumulates only
+over timescales exceeding the correlation time $\gamma^{-1}$. For continuous
+monitoring of stationary OU dynamics, the accumulated Fisher information about
+$\gamma$ scales asymptotically as
+\begin{equation}
+\FI_T(\gamma) \;\simeq\; \frac{T}{2\gamma} ,
+\end{equation}
+up to model-dependent prefactors fixed by the observation channel.
+
+\begin{proposition}[OU correlation-limited bound]
+\label{prop:ou_bound}
+Under continuous monitoring of stationary OU dynamics satisfying
+assumptions (O1)--(O3), the minimal operationally resolvable scale of $\gamma$
+satisfies
+\begin{equation}
+\delta\gamma_{\min}
+\;\gtrsim\;
+\sqrt{\frac{4\Dstar\,\gamma}{T}} .
+\label{eq:ou_bound}
+\end{equation}
+\end{proposition}
+
+\paragraph{Assumptions.}
+\begin{itemize}
+\item[(A1)] Stationary OU correlations with finite correlation time $\gamma^{-1}$;
+\item[(A2)] continuous monitoring without independent auxiliary probes;
+\item[(A3)] local (quadratic) Fisher-information geometry.
+\end{itemize}
+
+\paragraph{Proof sketch.}
+The Fisher information rate is set by the decay of correlations and is bounded by
+the inverse correlation time. Substitution of the asymptotic form
+$\FI_T(\gamma)\simeq T/(2\gamma)$ into the operational decision criterion
+yields Eq.~\eqref{eq:ou_bound}.
+\hfill$\square$
+
+\paragraph{Interpretation.}
+Proposition~\ref{prop:ou_bound} is epistemic. It reflects correlation-limited
+information extraction through the specified observation channel and does not
+imply any intrinsic lower bound on $\gamma$ itself.
+
+\subsection{Connection to the master inequality}
+
+Equation~\eqref{eq:ou_bound} is a direct instantiation of the master inequality
+(Proposition~\ref{prop:master_inequality}). Here, the distinguishability-rate
+envelope is fixed by the correlation structure of the process rather than by
+sampling frequency. Increasing the sampling rate without altering correlations
+does not increase $\DistRate$.
+
+\subsection{Falsifiability}
+
+The rate-limited hypothesis for continuous monitoring would be falsified by an
+experiment demonstrating Fisher information accumulation about $\gamma$ faster
+than linear in $T$ without modifying the observation channel or introducing
+additional independent degrees of freedom. Such a result would indicate either
+hidden information channels or a breakdown of the assumed stochastic dynamics.
+
+A direct diagnostic is to compare estimators built from (i) marginal statistics
+alone versus (ii) correlation-aware statistics. In the OU case, correlation-aware
+protocols must dominate for estimating the rate $\gamma$ under assumptions
+(O1)--(O3). Persistent marginal-only success at fixing $\gamma$ in that regime
+would signal an unaccounted auxiliary channel (e.g.\ calibrated knowledge of $D$
+or additional measured degrees of freedom).
+
+\subsection{Relation to quantum monitoring}
+
+Continuous classical monitoring provides the analogue of many quantum measurement
+scenarios, including weak measurement and open-system dynamics. In quantum
+systems, quantum Fisher information replaces $\FI_T$, and decoherence induces
+noise-suppressed distinguishability rates. These quantum instantiations are
+treated explicitly in Section~\ref{sec:quantum_systems}.
+
+% ============================================================
+% End of sections/05_continuous_monitoring.tex
+% ============================================================

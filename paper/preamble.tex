@@ -58,6 +58,8 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
 
 % ------------------------------------------------------------
 % Minimal "physics" substitutes (portable)
@@ -89,6 +91,11 @@
 \usepackage{pdfpages}
 
 % ------------------------------------------------------------
+% Utilities (must be before hyperref if used for link colors)
+% ------------------------------------------------------------
+\usepackage{xcolor}
+
+% ------------------------------------------------------------
 % References and hyperlinks
 % ------------------------------------------------------------
 \usepackage{hyperref}
@@ -108,16 +115,20 @@
 \setlist{noitemsep, topsep=0.3em}
 
 % ------------------------------------------------------------
-% Utilities
-% ------------------------------------------------------------
-\usepackage{xcolor}
-
-% ------------------------------------------------------------
 % Custom commands (minimal, semantic only)
 % ------------------------------------------------------------
 
-% Distinguishability rate
+% Distinguishability rate (base symbol)
+% IMPORTANT: This already contains a subscript "D".
 \newcommand{\DistRate}{v_{\mathrm{D}}}
+
+% Use superscripts (not subscripts) for variants of DistRate.
+% This avoids double-subscript issues like \DistRate_{\mathrm{ideal}}.
+\newcommand{\DistRateIdeal}{{\DistRate}^{\mathrm{ideal}}}
+
+% A safe "max-envelope" version of DistRate.
+% Intended usage in text: \DistRateMax(t)
+\newcommand{\DistRateMax}{{\DistRate}^{\max}}
 
 % Fisher Information
 \newcommand{\FI}{\mathcal{I}}
@@ -128,8 +139,15 @@
 % Observation flux (photon / event rate)
 \newcommand{\Flux}{\Phi}
 
+% D* threshold (build fix)
+\newcommand{\Dstar}{D^{\ast}}
+
 % Minimal resolvable time
 \newcommand{\deltat}{\delta t_{\min}}
+
+% Notation helpers
+\newcommand{\iid}{i.i.d.}
+\newcommand{\noniid}{non-i.i.d.}
 
 % ------------------------------------------------------------
 % Document hygiene

@@ -1,1 +1,152 @@
-\input{../sections/01_introduction}
+% ============================================================
+% sections/01_introduction.tex  (FULL REPLACEMENT)
+% ============================================================
+
+\section{Introduction}
+\label{sec:introduction}
+
+\subsection*{Scope and stance}
+
+This paper addresses a precise class of questions: \emph{how rapidly a physical
+parameter can be operationally distinguished from data} when observation occurs
+through a specified channel with finite statistics, finite bandwidth, and noise.
+Throughout, we draw a strict boundary between
+(i) \emph{epistemic limits} arising from rate-limited information accumulation and
+(ii) \emph{ontological constraints} that cannot be reduced to local inference
+geometry. Distinguishability-Rate Theory (DRT) formalizes this separation by
+treating inference itself as a physical process subject to rate bounds.
+
+\subsection*{Motivation: limits as rate constraints}
+
+Parameters such as time $t$, phase $\phi$, or a relaxation rate $\gamma$ may be
+well-defined within a model, yet experimentally accessible only via observation
+channels with finite counts, finite flux $\Flux$, and noise. In such settings, the
+relevant constraint is not the existence of the parameter, but the maximal rate at
+which distinguishability can be accumulated.
+DRT therefore replaces vague statements of ``fundamental limits'' by an explicit,
+operational question:
+\begin{quote}
+\emph{Given a decision threshold $\Dstar$ and an observation channel with
+finite-rate statistics, what is the minimal parameter variation that can be
+distinguished within available resources $T$, $N$, or $\Flux$?}
+\end{quote}
+The organizing principle of the paper is a master inequality relating achievable
+distinguishability to resource budgets and channel-induced information rates
+(Figures~\ref{fig:overview} and~\ref{fig:master}).
+
+\subsection*{Contributions}
+
+The contributions of this paper are the following. Each is formulated under
+explicit assumptions and is falsifiable within its stated regime.
+\begin{itemize}
+\item \textbf{Universal rate-limited bound (Proposition).}
+A master inequality is derived that upper-bounds the accumulation of Fisher or
+quantum Fisher information under finite-rate observation and noise
+(Section~\ref{sec:rate_limited_bounds}).
+
+\item \textbf{Self-consistent scaling laws (Theorems).}
+For Poisson-limited localization of normal diffusion, a self-consistency argument
+yields the cubic-root scaling
+$\delta t_{\min} \propto \Flux^{-1/3}$.
+For anomalous transport with $\mathrm{MSD}\sim t^\alpha$, this generalizes to
+$\delta t_{\min} \propto \Flux^{-1/(2+\alpha)}$
+(Section~\ref{sec:classical_diffusion};
+Figures~\ref{fig:phi_scaling},~\ref{fig:ctrw_alpha}).
+
+\item \textbf{Non-iid correlation no-go (Lemma/Theorem).}
+In continuous monitoring, data are intrinsically non-iid.
+For stationary Ornstein--Uhlenbeck processes, information about parameters resides
+in temporal correlations rather than in marginal statistics, yielding a formal
+no-go for marginal-only estimation
+(Section~\ref{sec:continuous_monitoring}; Figure~\ref{fig:ou}).
+
+\item \textbf{Reclassification of quantum limits (Propositions and No-Go
+Statements).}
+Quantum interferometric ``limits'' reducible to quantum Fisher information are
+identified as epistemic.
+Constraints not reducible to Fisher geometry are isolated as ontological residues
+(Sections~\ref{sec:quantum_systems}–\ref{sec:ontological_residues};
+Figures~\ref{fig:ramsey}–\ref{fig:mzi}).
+\end{itemize}
+
+\subsection*{Epistemic versus ontological limits}
+
+DRT is intentionally restricted to constraints derivable from operational
+distinguishability geometry and its accumulation rate. We adopt the following
+technical classification, which is used consistently throughout the paper:
+\begin{itemize}
+  \item \textbf{Epistemic (inference-limited).}
+  Bounds reducible to Fisher or quantum Fisher information accumulation under
+  stated channel assumptions. Such bounds \emph{must} relax when the
+  distinguishability rate or available resources increase.
+
+  \item \textbf{Ontological residues.}
+  Constraints that cannot be reduced to local Fisher or quantum Fisher geometry
+  without invoking additional global, algebraic, or compatibility assumptions.
+  These are treated explicitly in
+  Section~\ref{sec:ontological_residues}.
+\end{itemize}
+Operationally, a bound that fails to relax under controlled increases of
+distinguishability rate signals non-epistemic structure.
+
+\subsection*{Relation to existing approaches}
+
+Standard treatments of time--energy, phase, or metrological bounds often present
+inequalities as fundamental without explicitly separating inference geometry from
+ontological claims. DRT does not propose tighter constants.
+Instead, it provides a unified rate-based mechanism explaining when such bounds
+arise, how they scale with resources, and under which protocol changes they must
+fail. Within DRT, ``limits'' function as diagnostic indicators of inference
+structure rather than as axioms of nature.
+
+\subsection*{What this paper does not claim}
+
+For clarity, we explicitly state what is \emph{not} claimed:
+\begin{itemize}
+\item No claim is made that time, phase, or other parameters are ontologically
+undefined.
+\item No claim is made that all quantum bounds are epistemic; non-reducible
+constraints are preserved as ontological.
+\item No reinterpretation of quantum mechanics or replacement of its formalism is
+proposed.
+\end{itemize}
+
+\subsection*{Regimes and falsifiability}
+
+DRT distinguishes between:
+(i) i.i.d.\ sampling and non-iid continuous monitoring;
+(ii) finite-resource regimes where asymptotic scaling is not attained; and
+(iii) noise-dominated regimes where distinguishability rates are exponentially
+suppressed.
+Predicted scalings and breakdowns across these regimes are mapped explicitly in
+Section~\ref{sec:implications_falsifiability}.
+
+The framework is falsifiable: sustained accumulation of Fisher or quantum Fisher
+information exceeding the derived rate bounds—without modification of the
+observation channel or resource budget—would falsify the rate-limited hypothesis
+in the corresponding regime.
+
+\subsection*{Reproducibility}
+
+All numerical results and figures derive from a frozen Evidence Pack and are
+reproducible via a one-command workflow (Appendix~E). Each quantitative claim is
+traceable to deterministic scripts and stored outputs.
+
+\subsection*{Paper organization}
+
+Section~\ref{sec:operational_framework} introduces operational
+distinguishability and decision thresholds.
+Section~\ref{sec:rate_limited_bounds} derives the general rate-limited bounds.
+Classical realizations are developed in
+Sections~\ref{sec:classical_diffusion} and
+\ref{sec:continuous_monitoring}.
+Quantum systems are treated in Section~\ref{sec:quantum_systems}, and the
+epistemic--ontological boundary is formalized in
+Section~\ref{sec:ontological_residues}.
+Regime diagnostics and falsifiability are collected in
+Section~\ref{sec:implications_falsifiability}, followed by conclusions in
+Section~\ref{sec:conclusions}.
+
+% ============================================================
+% End of sections/01_introduction.tex
+% ============================================================
