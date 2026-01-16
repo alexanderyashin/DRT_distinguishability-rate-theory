@@ -325,3 +325,75 @@ Next allowed step:
 - make figs
 
 ================================================================================
+================================================================================
+EXECUTION UPDATE — Executor Chat #1 (Figure Generation Pass)
+================================================================================
+
+Date: 2026-01-16
+Branch: reanchor-scaling-claims
+Starting commit (post-sims): 8773f17
+
+----------------------------------------------------------------
+COMMANDS EXECUTED (verbatim)
+----------------------------------------------------------------
+- make figs
+  (failed)
+- (read-only schema inspection)
+  - python - <<'PY' ... inspect results/ctrw_phi_scaling.json keys ... PY
+  - sed -n '1,220p' results/ctrw_phi_scaling.json
+- python -m src.figs.fig3_phi_scaling
+- make figs
+
+----------------------------------------------------------------
+FIGURE RUN #1 — FAILURE
+----------------------------------------------------------------
+make figs error (verbatim):
+KeyError: 'phi'
+File:
+- src/figs/fig3_phi_scaling.py
+
+Root cause (confirmed):
+- fig3 script expected flat keys: data_diff["phi"], data_ctrw["phi"]
+- diffusion_phi_scaling.json is nested (data.phi, data.delta_t_median)
+- ctrw_phi_scaling.json is flat but uses delta_t_per_seed rather than delta_t
+
+----------------------------------------------------------------
+FIX (CODE) — fig3 JSON schema robustness
+----------------------------------------------------------------
+File updated:
+- src/figs/fig3_phi_scaling.py
+
+Changes:
+- diffusion: support nested schema (data.phi + data.delta_t_median)
+- ctrw: support flat schema (phi + delta_t_per_seed) by taking median over seeds
+- preserve legacy flat schema support if present (phi + delta_t)
+
+Single-fig verification:
+- python -m src.figs.fig3_phi_scaling
+  -> success (no stderr; produced figures/fig3_phi_scaling.pdf)
+
+----------------------------------------------------------------
+FIGURE RUN #2 — SUCCESS (COMPLETE)
+----------------------------------------------------------------
+make figs completed successfully and produced / refreshed PDFs in figures/:
+
+- figures/fig1_overview.pdf
+- figures/fig2_master_inequality_cartoon.pdf
+- figures/fig3_phi_scaling.pdf
+- figures/fig4_ou_gamma_bound.pdf
+- figures/fig5_ramsey_phase_diagram.pdf
+- figures/fig6_mzi_visibility.pdf
+- figures/fig7_noise_suppression_bound.pdf
+- figures/fig8_phi_slope_hist.pdf
+- figures/fig9_ctrw_alpha_sweep.pdf
+- figures/fig10_ramsey_optimal_time.pdf
+
+----------------------------------------------------------------
+STATUS ASSESSMENT
+----------------------------------------------------------------
+✅ READY FOR LaTeX BUILD (FINAL PAPER REBUILD)
+- sims pass complete (8773f17)
+- figs pass complete (this update)
+- next step: make pdf
+
+================================================================================
