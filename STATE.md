@@ -397,3 +397,42 @@ STATUS ASSESSMENT
 - next step: make pdf
 
 ================================================================================
+================================================================================
+EXECUTION UPDATE — Executor Chat #1 (Final LaTeX Build Pass)
+================================================================================
+
+Date: 2026-01-16
+Branch: reanchor-scaling-claims
+Starting commit (post-figs): 27e2195
+
+----------------------------------------------------------------
+COMMANDS EXECUTED (verbatim)
+----------------------------------------------------------------
+- make pdf
+
+----------------------------------------------------------------
+BUILD RESULT
+----------------------------------------------------------------
+✅ SUCCESS
+- Output: paper/main.pdf
+- Pages: 56
+- Trigger: rebuild due to updated external figure PDFs under ../figures/
+
+Warnings (non-blocking):
+- Underfull \hbox (badness 2197) in sections/08_implications_falsifiability.tex
+  (paragraph at lines 105--108)
+
+----------------------------------------------------------------
+STATUS ASSESSMENT
+----------------------------------------------------------------
+✅ READY FOR RELEASE PACKAGING / DOI INSERTION
+- sims complete (8773f17)
+- figs complete (27e2195)
+- pdf build complete (this update)
+
+Next step (outside executor scope unless instructed):
+- Zenodo upload + DOI assignment
+- Update CITATION.cff DOI field
+- Final release freeze tag
+
+================================================================================
