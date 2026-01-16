@@ -126,3 +126,71 @@ Failure to update this file = broken handoff.
 - By: Logion (Generator Chat)
 - Reason: Repository state updated after full paper + appendices generation;
           metadata and execution layers still pending.
+================================================================================
+EXECUTION UPDATE — Executor Chat #1 (Reproducibility Pass)
+================================================================================
+
+Date: 2026-01-16
+Executor: Executor Chat #1
+Branch: reanchor-scaling-claims
+Commit: 9d6cc36
+
+----------------------------------------------------------------
+COMMANDS EXECUTED (verbatim)
+----------------------------------------------------------------
+- git add -A
+- git commit -m "WIP: reanchor scaling claims + paper text/sims updates (snapshot before next pass)"
+- git push -u origin reanchor-scaling-claims
+- make pdf
+- make doctor
+
+----------------------------------------------------------------
+BUILD & ENVIRONMENT STATUS
+----------------------------------------------------------------
+LaTeX build:
+- make pdf → SUCCESS
+- Output: paper/main.pdf
+- latexmk present and functional
+
+Environment check (make doctor):
+- python3 found
+- Python version: 3.12
+- Required python packages: AVAILABLE
+- latexmk: FOUND
+- directory structure: OK
+
+----------------------------------------------------------------
+UPDATED FACTUAL STATE
+----------------------------------------------------------------
+The following items are now COMPLETE:
+
+- zenodo.json: PRESENT and committed
+- RUNBOOK.md: PRESENT and committed
+- STATE.md: updated with execution record
+- LaTeX build: SUCCESSFUL
+- Environment sanity check: PASSED
+
+----------------------------------------------------------------
+STATUS ASSESSMENT
+----------------------------------------------------------------
+Repository is now in state:
+
+✅ READY FOR SIMULATIONS
+
+No blockers detected at environment or build level.
+No silent fixes performed.
+All actions traceable to commit 9d6cc36.
+
+----------------------------------------------------------------
+NEXT ALLOWED STEP
+----------------------------------------------------------------
+Handoff to:
+→ Executor Chat #1 (Simulation Pass)
+
+Permitted commands (per RUNBOOK):
+- make sims
+- make figs
+
+All further steps must be logged here.
+
+================================================================================
