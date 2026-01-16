@@ -23,7 +23,12 @@ from src.config import RNG_DEFAULT
 from src.sims.ctrw_mc import run_simulation
 
 
-def bootstrap_ci_mean(values: np.ndarray, n_boot: int = 2000, alpha: float = 0.05, seed: int = 777) -> tuple[float, float]:
+def bootstrap_ci_mean(
+    values: np.ndarray,
+    n_boot: int = 2000,
+    alpha: float = 0.05,
+    seed: int = 777,
+) -> tuple[float, float]:
     rng = np.random.default_rng(seed)
     n = int(values.size)
     if n == 0:
@@ -56,9 +61,16 @@ def main():
     for i, a in enumerate(alphas):
         rep_slopes = []
         for r in range(n_rep):
-            set_seed(base_seed + 10_000 * i + r)
+            seed = base_seed + 10_000 * i + r
+            set_seed(seed)
+            rng = np.random.default_rng(seed)
 
-            dt = run_simulation(phi_values, alpha=float(a), n_mc=int(n_mc))
+            dt = run_simulation(
+                phi_values,
+                alpha=float(a),
+                n_mc=int(n_mc),
+                rng=rng,
+            )
             slope, _ = linear_regression_loglog(phi_values, dt)
             rep_slopes.append(float(slope))
 

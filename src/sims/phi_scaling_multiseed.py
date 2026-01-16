@@ -24,13 +24,18 @@ import numpy as np
 
 from src.stats_utils import set_seed, linear_regression_loglog
 from src.config import RNG_DEFAULT
-from src.sims.diffusion_localization_mc import run_simulation
+from src.sims.diffusion_localization_mc import Params, run_simulation
 
 RESULTS_DIR = Path("results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def bootstrap_ci_mean(values: np.ndarray, n_boot: int = 5000, alpha: float = 0.05, seed: int = 777) -> tuple[float, float]:
+def bootstrap_ci_mean(
+    values: np.ndarray,
+    n_boot: int = 5000,
+    alpha: float = 0.05,
+    seed: int = 777,
+) -> tuple[float, float]:
     rng = np.random.default_rng(seed)
     n = int(values.size)
     if n == 0:
@@ -62,18 +67,20 @@ def main() -> None:
     phi_values = np.array(cfg.phi_values, dtype=float)
 
     slopes = []
-    # Use deterministic seed schedule derived from RNG_DEFAULT.seed
     base_seed = int(getattr(RNG_DEFAULT, "seed", 12345))
 
     for k in range(cfg.n_seeds):
-        set_seed(base_seed + 10_000 + k)
+        seed = base_seed + 10_000 + k
+        set_seed(seed)
+        rng = np.random.default_rng(seed)
 
-        delta_t = run_simulation(
-            phi_values,
+        p = Params(
             D=float(cfg.D),
             sigma_m=float(cfg.sigma_m),
             n_mc=int(cfg.n_mc),
         )
+
+        delta_t, _diags = run_simulation(phi_values, p, rng)
         slope, intercept = linear_regression_loglog(phi_values, delta_t)
         slopes.append(float(slope))
 
