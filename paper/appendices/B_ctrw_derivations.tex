@@ -63,8 +63,16 @@ fixed point of this estimator variance:
 \delta t \;\sim\; \sqrt{v_{\hat t}(\delta t)}.
 \label{eq:ctrw_closure_loop}
 \end{equation}
-This is a \emph{closure condition}. It is not a CRLB extremization and does not
-claim inference-optimality.
+
+\begin{quote}
+\textbf{Class lock.}
+Equation~\eqref{eq:ctrw_closure_loop} defines a \textbf{Class~0A}
+self-consistent fixed point.
+It is \emph{not} a Cram\'er--Rao bound, not an optimal-observation-time
+condition, and not obtained by extremizing any objective in $t$.
+Any differentiation or minimization with respect to $t$ necessarily
+changes the problem class.
+\end{quote}
 
 \subsection{Scaling of the estimator variance under Poisson-limited sampling}
 

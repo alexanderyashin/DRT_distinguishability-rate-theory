@@ -129,6 +129,61 @@ In all cases, the same decision inequality
 \eqref{eq:decision_threshold} applies; only the structure and growth of the
 accumulated information differ.
 
+\subsection{Regime classification and scaling classes}
+
+To prevent category errors and misinterpretation of scaling exponents, all
+resolution results in DRT are classified by task type and epistemic class.
+Scaling relations are valid \emph{only} within their originating class and must
+not be transferred across rows of Table~\ref{tab:regime_classification}.
+
+\begin{table}[t]
+\centering
+\caption{Classification of temporal-resolution regimes in
+Distinguishability--Rate Theory.
+Each scaling exponent is tied to a specific task class and must not be
+reinterpreted outside that class.}
+\label{tab:regime_classification}
+\begin{tabular}{lllll}
+\hline
+\textbf{Task} &
+\textbf{Observable} &
+\textbf{Scaling} &
+\textbf{Class} &
+\textbf{Reference} \\
+\hline
+Inference-only estimation &
+Local parameter offset $\delta\theta$ &
+$\delta\theta_{\min}\propto \FI_T^{-1/2}$ &
+Class~I &
+App.~\ref{app:fisher_qfi} \\
+
+Self-consistent temporal resolution &
+Elapsed time $\delta t$ &
+$\delta t_{\min}\propto \Phi^{-1/3}$ &
+Class~0A &
+App.~\ref{app:phi_minus_one_third} \\
+
+Self-consistent anomalous transport &
+Elapsed time $\delta t$ &
+$\delta t_{\min}\propto \Phi^{-1/(2+\alpha)}$ &
+Class~0A &
+App.~\ref{app:ctrw_derivations} \\
+
+Exponent-imposed simulation &
+Synthetic estimator output &
+Preset $\Phi^{-1/(2+\alpha)}$ &
+Class~0B &
+App.~\ref{app:ctrw_derivations} \\
+
+Quantum inference (local) &
+Parameter $\theta$ &
+$\delta\theta_{\min}\propto \mathcal{I}_T^{-1/2}$ &
+Class~I &
+App.~\ref{app:fisher_qfi} \\
+\hline
+\end{tabular}
+\end{table}
+
 \subsection{Epistemic scope and non-claims}
 
 The framework introduced here makes no ontological assertions. A bound on

@@ -155,6 +155,22 @@ Therefore,
 \delta t_\ast \propto \Phi^{-1/3}.
 \end{equation}
 
+\begin{quote}
+\textbf{Non-extremization guard (Class separation).}
+The Fisher-information expressions introduced below are \emph{not}
+used to optimize, extremize, or differentiate with respect to the
+observation time $t$.
+The relation $\delta t \propto \FI_T^{-1/2}$ applies exclusively to
+\emph{inference-only} problems (Class~I), where the observation window
+is an independent control parameter.
+
+In the present construction (Class~0A), Fisher information enters only
+to \emph{evaluate} the self-consistent closure at $t=\delta t$.
+Any procedure that differentiates a surrogate variance with respect to
+$t$ necessarily changes the problem class and yields a different
+scaling exponent.
+\end{quote}
+
 \subsection{Fisher information and the operational decision criterion}
 
 For a Gaussian family with known mean and variance $V(t)$, the per-sample
