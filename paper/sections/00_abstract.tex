@@ -9,7 +9,7 @@ framework for analyzing limits of resolution in time, phase, and related
 parameters.
 The framework is based on a single primitive: the finite rate at which
 distinguishability can be accumulated through a specified observation channel.
-Resolution bounds are derived from explicit information-theoretic constraints on
+Resolution limits are derived from explicit information-theoretic constraints on
 Fisher and quantum Fisher information under finite statistics, noise,
 correlations, and measurement dynamics, without postulating ontological limits
 \emph{a priori}.
@@ -20,8 +20,23 @@ Whenever distinguishability accumulates at a bounded rate, a minimal resolvable
 scale follows as an operational necessity.
 As distinguishability rate, available statistics, or channel quality increase,
 these limits relax.
-Within this framework, a broad class of widely cited bounds is shown to be
-\emph{epistemic} rather than ontological.
+Within this framework, widely cited ``fundamental limits'' can be separated into
+(i) inference-limited statements and (ii) constraints requiring independent
+ontological structure.
+
+\paragraph{Claim taxonomy (used throughout).}
+We distinguish:
+\begin{itemize}
+\item \textbf{Class I (inference-supported):} decision-based statements validated
+by simulations that implement an explicit operational distinguishability
+criterion;
+\item \textbf{Class 0A (self-consistent closures):} scaling constructions obtained
+by closing an estimator--variance loop under a specified channel, without posing
+a CRLB-style extremization problem;
+\item \textbf{Class 0B (generator-imposed demonstrations):} numerical pipeline
+checks where an exponent is imposed by the simulator/generator and therefore is
+not inference evidence.
+\end{itemize}
 
 \paragraph{Main results.}
 \begin{itemize}
@@ -30,16 +45,17 @@ A master inequality constrains achievable resolution by the envelope of
 distinguishability accumulation imposed by a given observation channel
 (Section~\ref{sec:rate_limited_bounds}).
 
-\item \textbf{Self-consistent scaling constructions.}
-For Poisson-limited diffusion, the operational localization scaling
-$\delta t_{\min}\propto \Flux^{-1/3}$ is obtained as a
-\emph{self-consistent fixed-point construction} (Class~0A; non-inference)
-under the specified observation model
-(Section~\ref{sec:classical_diffusion}).
-The same analytic logic yields the generalized scaling
+\item \textbf{Self-consistent scaling constructions (Class 0A).}
+For Poisson-limited diffusion, a cubic-root flux dependence
+$\delta t_{\min}\propto \Flux^{-1/3}$ arises as a \emph{self-consistent fixed-point
+closure} (Class~0A; non-inference) under the specified observation model
+(Section~\ref{sec:classical_diffusion}; Appendix~\ref{app:phi_minus_one_third}).
+This is a closure time scale of an estimator--variance loop, not an
+inference-optimal ``best possible'' scaling claim.
+The same closure logic yields the generalized dependence
 $\delta t_{\min}\propto \Flux^{-1/(2+\alpha)}$ for anomalous transport with
 $\mathrm{MSD}\sim t^\alpha$, likewise interpreted as a construction rather than
-an inference-supported bound.
+an inference-supported bound (Appendix~\ref{app:ctrw_derivations}).
 
 \item \textbf{Non-\iid\ inference and correlation no-go.}
 Continuous monitoring is shown to constitute an intrinsically non-\iid\
@@ -53,9 +69,9 @@ operational no-go for marginal estimation
 Many quantum interferometric bounds are reducible to constraints on quantum
 Fisher information and therefore limit inference rather than encode ontological
 structure.
-Constraints that are not Fisher-reducible—such as those arising from
-non-classical event structure—are isolated as genuine ontological residues
-(Sections~\ref{sec:quantum_systems}–\ref{sec:ontological_residues}).
+Constraints that are not Fisher-reducible---such as those arising from
+non-classical event structure---are isolated as genuine ontological residues
+(Sections~\ref{sec:quantum_systems}--\ref{sec:ontological_residues}).
 \end{itemize}
 
 \paragraph{Epistemic--ontological boundary.}
@@ -67,17 +83,19 @@ Constraints that persist under such exhaustion signal non-epistemic structure.
 
 \paragraph{Evidence and falsifiability.}
 Analytic constructions are accompanied by frozen, fully reproducible numerical
-simulations that serve as \emph{consistency checks} of the underlying models and
+simulations that serve as \emph{consistency checks} of the assumed models and
 analysis pipelines.
-Inference-supported claims are explicitly restricted to decision-based
-simulations implementing operational distinguishability thresholds.
+Inference-supported statements are explicitly restricted to decision-based
+simulations implementing an operational distinguishability threshold.
+Class~0A and Class~0B demonstrations are labeled accordingly and are not used as
+standalone inference evidence.
 Core claims are falsifiable by observing systematic violations of the predicted
 rate-dependent envelopes or by extracting parameter information from statistical
 marginals in regimes where DRT predicts correlation-only access.
 
 \paragraph{Scope.}
 DRT provides a unifying operational language across classical and quantum systems
-and a principled diagnostic for interpreting claimed fundamental limits.
+and a principled diagnostic for interpreting claimed limits.
 It does not assert that all quantum constraints are epistemic; rather, it
 identifies precisely which constraints are inference-limited and which require
 independent ontological assumptions.

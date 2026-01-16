@@ -1,32 +1,52 @@
 cff-version: 1.2.0
-message: "If you use this work, please cite it as below."
-title: "Distinguishability Rate Theory: Epistemic Limits, Time Resolution, and the Boundary of Quantum Ontology"
+message: "If you use this work, please cite it as specified below."
+
+title: >
+  Distinguishability as a Physical Primitive:
+  Rate-Limited Inference, Temporal Resolution,
+  and the Boundary of Quantum Ontology
+
 type: software
+
 authors:
   - family-names: Yashin
     given-names: Alexander
     orcid: https://orcid.org/0000-0000-0000-0000
-repository-code: https://github.com/<to-be-created>/drt-platinum
+    affiliation: Independent Researcher, Germany
+
 abstract: >
-  This repository contains the full source code, simulations, and LaTeX
-  manuscript for a journal-grade study of Distinguishability Rate Theory (DRT).
-  The work develops a unified information-theoretic framework for operational
-  limits of inference, minimal time resolution, and the boundary between
-  epistemic constraints and ontological nonclassicality in quantum mechanics.
+  This repository contains a journal-grade LaTeX manuscript and a fully
+  reproducible simulation pipeline for Distinguishability Rate Theory (DRT).
+  The work develops an operational, information-theoretic framework for limits
+  of temporal, phase, and parameter resolution arising from finite rates of
+  distinguishability accumulation imposed by observation channels. It formally
+  separates epistemic (Fisher/QFI-reducible) inference limits from non-epistemic
+  constraints associated with global or algebraic structure in quantum theory.
+  Numerical simulations serve reproducibility and regime illustration only and
+  are not used to infer analytic results.
+
 keywords:
   - distinguishability
   - fisher information
   - quantum fisher information
+  - inference limits
   - time resolution
-  - quantum foundations
+  - quantum metrology
+  - foundations of physics
   - information theory
+  - continuous monitoring
+
 license: MIT
+
 preferred-citation:
   type: article
   authors:
     - family-names: Yashin
       given-names: Alexander
-  title: "Distinguishability Rate Theory: Epistemic Limits, Time Resolution, and the Boundary of Quantum Ontology"
-  journal: "Zenodo (preprint)"
+  title: >
+    Distinguishability as a Physical Primitive:
+    Rate-Limited Inference, Temporal Resolution,
+    and the Boundary of Quantum Ontology
+  publisher: Zenodo
   year: 2026
   doi: 10.5281/zenodo.TODO

@@ -1,5 +1,5 @@
 % ============================================================
-% paper/figures/figures.tex
+% paper/figures/figures.tex  (FULL REPLACEMENT)
 % ============================================================
 % Figures live in repository root: ../figures/*.pdf
 % Included from paper/main.tex via \input{figures/figures}.
@@ -8,18 +8,27 @@
 \section*{Figures}
 
 All figures included in this paper are generated from the frozen Evidence
-Pack and are provided as external PDF files. They are included here without
-modification to preserve numerical and visual integrity.
+Pack and are provided as external PDF files.
+They are included here without modification to preserve numerical and visual
+integrity.
 Unless stated otherwise, figures illustrating scaling behavior are to be
 interpreted as numerical consistency checks of analytic constructions or
 analysis pipelines, not as independent inference evidence.
+
+Throughout this section, it is essential to distinguish between
+\emph{inference-only regimes} (no self-consistent closure; shot-noise--type
+scalings such as $\Flux^{-1/2}$ may arise depending on the task/model) and
+\emph{closure-limited constructions}, where estimator uncertainty feeds back
+into the effective observation window, producing different exponents.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.98\linewidth]{../figures/fig1_overview.pdf}
 \caption{DRT concept overview: distinguishability accumulates at a finite rate
-determined by the measurement channel, noise, and statistics. Operational
-resolution bounds follow from rate-limited inference.}
+determined by the measurement channel, noise, and statistics.
+Operational resolution bounds follow from rate-limited inference and may depend
+qualitatively on whether the task is inference-only or involves a
+self-consistent closure.}
 \label{fig:overview}
 \end{figure}
 
@@ -27,50 +36,68 @@ resolution bounds follow from rate-limited inference.}
 \centering
 \includegraphics[width=0.88\linewidth]{../figures/fig2_master_inequality_cartoon.pdf}
 \caption{Schematic master inequality: ideal information accumulation versus an
-upper bound suppressed by noise and finite-rate observation.}
+upper bound suppressed by noise and finite-rate observation.
+Shot-noise--type behavior (e.g.\ $\Flux^{-1/2}$) can arise in inference-only
+settings without closure, while alternative exponents emerge once additional
+self-consistency constraints are imposed.}
 \label{fig:master}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.88\linewidth]{../figures/fig3_phi_scaling.pdf}
-\caption{Poisson-limited diffusion localization: $\deltat \propto \Flux^{-1/3}$
-as a self-consistent fixed-point construction (Class~0A; non-inference).
-The Monte Carlo curve provides a numerical consistency check of the construction
-and the fitting pipeline under the specified observation model.}
+\caption{Poisson-limited diffusion localization:
+$\deltat \propto \Flux^{-1/3}$ obtained as a
+\emph{self-consistent fixed-point construction} (Class~0A; non-inference).
+Here the estimator variance depends on the observation window, which is itself
+determined self-consistently.
+The Monte Carlo curve serves as a numerical consistency check of this closure,
+not as inference evidence.
+By contrast, inference-only formulations that do not include such a closure can
+exhibit shot-noise--type behavior (e.g.\ $\Flux^{-1/2}$), depending on the
+posed decision task and channel model.}
 \label{fig:phi_scaling}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.88\linewidth]{../figures/fig4_ou_gamma_bound.pdf}
-\caption{OU-process / continuous monitoring bound: correlation-driven Fisher
-information yields an operational limit on parameter resolution.}
+\caption{OU-process / continuous monitoring bound:
+correlation-driven Fisher information yields an operational limit on parameter
+resolution.
+The bound illustrates rate-limited inference behavior rather than a universal
+scaling exponent.}
 \label{fig:ou}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.88\linewidth]{../figures/fig5_ramsey_phase_diagram.pdf}
-\caption{Ramsey meeting-point (MP): inference-limited phase scale versus a
-dynamical scale; the crossing indicates an operational boundary rather than a
-scaling law.}
+\caption{Ramsey meeting-point (MP):
+inference-limited phase scale versus a dynamical scale.
+The crossing identifies an operational boundary set by competing rates, not a
+power-law scaling.}
 \label{fig:ramsey}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.88\linewidth]{../figures/fig6_mzi_visibility.pdf}
-\caption{Mach--Zehnder meeting-point (MP): inference-limited phase scale versus a
-geometric scale under visibility and noise constraints.}
+\caption{Mach--Zehnder meeting-point (MP):
+inference-limited phase scale versus a geometric scale under visibility and noise
+constraints.
+As in the Ramsey case, the figure illustrates a trade-off rather than a scaling
+law.}
 \label{fig:mzi}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.88\linewidth]{../figures/fig7_noise_suppression_bound.pdf}
-\caption{Noise suppresses Fisher accumulation: ideal information growth is
-replaced by a bounded envelope under exponential suppression.}
+\caption{Noise suppresses Fisher information accumulation:
+ideal linear growth is replaced by a bounded envelope under exponential
+suppression, emphasizing the role of the observation channel in rate-limited
+inference.}
 \label{fig:noise}
 \end{figure}
 
@@ -79,27 +106,32 @@ replaced by a bounded envelope under exponential suppression.}
 \includegraphics[width=0.88\linewidth]{../figures/fig8_phi_slope_hist.pdf}
 \caption{Multi-seed slope statistics for the diffusion $\Flux$-scaling experiment.
 The distribution is consistent with the fixed-point construction exponent
-$-1/3$ (Class~0A; non-inference) and reflects numerical stability of the fitting
-procedure rather than inference validation.}
+$-1/3$ (Class~0A; closure-limited, non-inference) and demonstrates numerical
+stability of the fitting pipeline.
+It should not be interpreted as evidence against inference-only shot-noise
+behavior, which can yield $\Flux^{-1/2}$ under tasks/models that do not include
+self-consistent closure.}
 \label{fig:phi_hist}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.88\linewidth]{../figures/fig9_ctrw_alpha_sweep.pdf}
-\caption{CTRW $\alpha$-sweep (Class~0B; exponent-imposed generator; non-inference):
+\caption{CTRW $\alpha$-sweep
+(Class~0B; exponent-imposed generator; non-inference):
 fitted slopes versus the expected construction exponent $-1/(2+\alpha)$ across
-transport exponents. The sweep serves as a numerical consistency check of the
-generator and analysis pipeline, not as inference evidence.}
+transport exponents.
+The sweep validates the generator and analysis pipeline but does not constitute
+independent inference evidence.}
 \label{fig:ctrw_alpha}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.88\linewidth]{../figures/fig10_ramsey_optimal_time.pdf}
-\caption{Ramsey optimal interrogation time under decoherence: information gain
-versus loss yields a finite optimum, illustrating an operational trade-off rather
-than a scaling law.}
+\caption{Ramsey optimal interrogation time under decoherence:
+information gain versus loss yields a finite optimum,
+illustrating an operational trade-off rather than a scaling law.}
 \label{fig:ramsey_opt}
 \end{figure}
 

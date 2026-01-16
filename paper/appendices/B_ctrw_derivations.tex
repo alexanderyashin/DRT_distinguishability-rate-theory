@@ -2,160 +2,144 @@
 % appendices/B_ctrw_derivations.tex  (FULL REPLACEMENT)
 % ============================================================
 
-\section{Anomalous Diffusion: CTRW Fixed-Point Construction}
+\section{Self-Consistent Fixed-Point Construction for Anomalous Transport:
+\texorpdfstring{$\boldsymbol{\Phi^{-1/(2+\alpha)}}$}{Phi(-1/(2+alpha)) Scaling}}
 \label{app:ctrw_derivations}
 
-This appendix generalizes the self-consistent fixed-point construction
-of Appendix~\ref{app:phi_minus_one_third} to anomalous diffusion
-described by continuous-time random walks (CTRW).
-The purpose is to construct the photon-limited scaling
-\[
-\delta t_{\min}\propto \Phi^{-1/(2+\alpha)}
-\]
-under explicit, operational assumptions.
-No claim of decision-based inference or data-driven exponent extraction
-is made; the transport exponent $\alpha$ is treated as an imposed
-property of the latent process.
+This appendix generalizes the Class~0A self-consistent closure mechanism
+(appendix-level construction) to anomalous transport with mean-square
+displacement (MSD) scaling $\mathrm{MSD}(t)\sim C\,t^\alpha$.
+The resulting scaling
+$\delta t_{\min}\propto \Phi^{-1/(2+\alpha)}$ is \emph{construction-based}
+and \emph{not} inference validation.
 
-\subsection{CTRW model and transport exponent}
+\paragraph{Misreading guard.}
+The exponent derived here is \emph{not} obtained by minimizing an explicit
+objective in $t$ (no ``optimal observation time'' is claimed).
+In particular, one must not interpret the construction as the extremum of a
+surrogate ``variance'' expression of the form
+$C t^\alpha + \sigma_m^2/(\Phi t)$.
+Any such extremization belongs to a different modeling choice and can lead to
+different exponents. The Class~0A result is defined by a closure loop on an
+estimator family under a Poisson-limited channel.
 
-We consider a CTRW characterized by independent spatial jumps with finite
-second moment and waiting times drawn from a heavy-tailed distribution.
-In the long-time limit, the mean-square displacement (MSD) scales as
+\subsection{Setup and assumptions}
+
+We assume a one-dimensional stochastic process with MSD scaling
 \begin{equation}
-\langle x^2(t)\rangle \;\sim\; C\, t^\alpha,
+\langle x^2(t)\rangle \sim C\,t^\alpha,
 \qquad 0<\alpha<2,
 \end{equation}
-where $C$ is a generalized transport coefficient.
-The regimes $\alpha<1$, $\alpha=1$, and $\alpha>1$ correspond to
-subdiffusion, normal diffusion, and superdiffusion, respectively.
+observed through a Poisson point process of detection events with constant
+flux $\Phi$.
+Each detection yields an independent position estimate with Gaussian
+uncertainty $\sigma_m$.
 
-\paragraph{Assumptions.}
-The construction relies on:
+Assumptions (same epistemic status as Appendix~A):
 \begin{enumerate}
-\item A prescribed asymptotic MSD exponent $\alpha$ characterizing the
-latent transport process.
-\item Poissonian detection statistics with constant photon flux $\Phi$.
-\item Independent measurement noise with variance $\sigma_m^2$ per
-detection.
-\item A fixed operational distinguishability threshold $D^\ast$
-(Appendix~\ref{app:fisher_qfi}) used as an internal consistency criterion.
+\item MSD scaling $\mathrm{MSD}(t)\sim C\,t^\alpha$ holds over the relevant
+time range (local power-law regime).
+\item Poissonian detection statistics with rate $\Phi$.
+\item Independent per-detection measurement noise with variance $\sigma_m^2$.
+\item A fixed operational decision threshold $D^\ast$ used internally
+(Appendix~\ref{app:fisher_qfi}) to interpret ``resolvable'' as an operational
+criterion, not as an inference-optimal bound.
 \end{enumerate}
 
-\subsection{Operational localization balance}
+\subsection{Closure target: an estimator--variance loop}
 
-As in Appendix~\ref{app:phi_minus_one_third}, the effective localization
-variance $\sigma^2(t)$ reflects a balance between anomalous spreading and
-measurement-induced localization.
-Operationally,
+As in Appendix~A, the construction is defined by a \emph{self-consistent loop}
+on an estimator family.
+Let $\hat t$ denote an elapsed-time estimator built from the measurement record
+restricted to a window of duration $t$.
+Denote its mean-square error (MSE) by
 \begin{equation}
-\sigma^2(t)\;\sim\; C\, t^\alpha \;+\; \frac{\sigma_m^2}{\Phi t}.
-\label{eq:ctrw_balance}
+v_{\hat t}(t) \;:=\; \mathbb{E}\!\left[(\hat t - t)^2\right].
 \end{equation}
-The first term captures the imposed anomalous transport of the latent
-trajectory, while the second encodes finite-rate information acquisition
-through Poisson-limited measurements.
 
-\subsection{Self-consistent fixed-point time scale}
-
-The characteristic time scale associated with the construction is
-obtained by minimizing $\sigma^2(t)$ with respect to $t$.
-Differentiating Eq.~\eqref{eq:ctrw_balance} gives
+The Class~0A closure postulates that the operational resolution scale is the
+fixed point of this estimator variance:
 \begin{equation}
-\frac{d\sigma^2}{dt}
-= \alpha C t^{\alpha-1}
-- \frac{\sigma_m^2}{\Phi t^2}.
+\delta t \;\sim\; \sqrt{v_{\hat t}(\delta t)}.
+\label{eq:ctrw_closure_loop}
 \end{equation}
-Setting the derivative to zero yields the fixed point
+This is a \emph{closure condition}. It is not a CRLB extremization and does not
+claim inference-optimality.
+
+\subsection{Scaling of the estimator variance under Poisson-limited sampling}
+
+Under Poisson-limited sampling, the number of detections in a window of length
+$t$ satisfies $N\sim \mathrm{Poisson}(\Phi t)$, hence $\mathbb{E}[N]\asymp \Phi t$.
+Finite sampling implies that any estimator built from the record inherits an
+MSE contribution that scales inversely with the expected event count,
 \begin{equation}
-t_\ast \;\sim\;
-\left(\frac{\sigma_m^2}{C\,\Phi}\right)^{\!1/(2+\alpha)}.
-\label{eq:ctrw_t_star}
+v_{\hat t}(t)\;\propto\;\frac{1}{\Phi t}\;\times\;\Big(\text{time-sensitivity factor}\Big)^{-2}.
+\label{eq:ctrw_sampling_skeleton}
 \end{equation}
-This scale marks the balance between anomalous spreading and finite-rate
-measurement-induced uncertainty reduction.
+The ``time-sensitivity factor'' is determined by how strongly the observable
+statistics change with $t$.
 
-\subsection{Temporal distinguishability}
-
-Temporal distinguishability arises because the width of the anomalous
-diffusion process depends on time.
-For small temporal offsets $\delta t$, the Fisher information about time
-scales inversely with the localization variance,
+For MSD scaling $\mathrm{MSD}(t)\sim C t^\alpha$, the characteristic spatial
+scale grows as $\sqrt{C}\,t^{\alpha/2}$, so local time sensitivity of the scale
+is
 \begin{equation}
-I_T(t) \;\sim\; \frac{t}{\sigma^2(t)},
-\label{eq:ctrw_fi_scaling}
+\frac{d}{dt}\left(t^{\alpha/2}\right)\;\asymp\; t^{\alpha/2-1}.
 \end{equation}
-up to dimensionless constants.
-This relation expresses how changes in the MSD encode temporal
-information under the specified observation channel.
-
-Evaluating Eq.~\eqref{eq:ctrw_fi_scaling} at the self-consistent scale
-$t_\ast$ gives
+Under the same local-geometry regime used throughout the paper (quadratic
+approximation in small $\delta t$), this induces the scaling
 \begin{equation}
-I_T(t_\ast)
+v_{\hat t}(t)\;\propto\;\frac{\sigma_m^2}{\Phi t}\;\times\; t^{2-\alpha},
+\label{eq:ctrw_vhat_scaling}
+\end{equation}
+up to dimensionless constants and factors absorbed into $C$.
+Equation~\eqref{eq:ctrw_vhat_scaling} is the only scaling input needed for the
+closure exponent.
+
+\subsection{Fixed-point exponent}
+
+Substituting Eq.~\eqref{eq:ctrw_vhat_scaling} into the closure loop
+Eq.~\eqref{eq:ctrw_closure_loop} gives
+\begin{equation}
+\delta t
 \;\sim\;
-\Phi^{\frac{2}{2+\alpha}}\,
-C^{-\frac{1}{2+\alpha}}\,
-\sigma_m^{-\frac{2\alpha}{2+\alpha}},
+\sqrt{v_{\hat t}(\delta t)}
+\;\propto\;
+\sqrt{\frac{\sigma_m^2}{\Phi\,\delta t}\;\delta t^{2-\alpha}}
+\;=\;
+\frac{\sigma_m}{\sqrt{\Phi}}\;\delta t^{(1-\alpha/2)}.
 \end{equation}
-where numerical prefactors have been suppressed, as they do not affect
-scaling exponents.
-
-\subsection{Operational time-resolution scaling}
-
-The minimal resolvable temporal offset $\delta t_{\min}$ follows from
-the operational decision criterion
+Rearranging yields the fixed-point scaling
 \begin{equation}
-\delta t^2\, I_T \;\gtrsim\; 2D^\ast,
+\delta t^{1+\alpha/2}
+\;\propto\;
+\frac{\sigma_m}{\sqrt{\Phi}},
 \end{equation}
-used here as an internal closure condition.
-Substituting the scaling of $I_T(t_\ast)$ yields
+or, equivalently,
 \begin{equation}
 \delta t_{\min}
-\;\sim\;
-\Phi^{-\,\frac{1}{2+\alpha}},
-\label{eq:ctrw_scaling}
+\;\propto\;
+\Phi^{-1/(2+\alpha)}.
 \end{equation}
-up to prefactors depending on $C$, $\sigma_m$, and $D^\ast$.
+All prefactors depend on the chosen estimator family and the local-regime
+constants; the exponent is the construction output.
 
-\subsection{Consistency with normal diffusion}
+\paragraph{Reduction to normal diffusion.}
+For $\alpha=1$ the construction reduces to
+$\delta t_{\min}\propto \Phi^{-1/3}$, consistent with Appendix~A and
+Section~\ref{sec:classical_diffusion}, with the same epistemic status
+(Class~0A closure).
 
-Setting $\alpha=1$ in Eq.~\eqref{eq:ctrw_scaling} recovers the cubic-root
-law $\delta t_{\min}\propto \Phi^{-1/3}$ obtained in
-Appendix~\ref{app:phi_minus_one_third}.
-The CTRW result therefore represents a continuous generalization of the
-same fixed-point construction rather than a distinct inference
-mechanism.
+\subsection{Epistemic status and relation to Class 0B simulations}
 
-\subsection{Numerical consistency checks}
+The exponent $-1/(2+\alpha)$ obtained here is epistemic and
+construction-based.
+It depends explicitly on the MSD exponent $\alpha$ and the Poisson-limited
+observation channel.
 
-Monte Carlo simulations of CTRW trajectories with prescribed $\alpha$
-are used as a consistency check of the fixed-point construction.
-An $\alpha$-sweep comparing extracted slopes against the imposed
-theoretical exponent $-1/(2+\alpha)$ is included in the frozen Evidence
-Pack (Figure~9).
-These simulations do not constitute discovery or validation of the
-scaling law; they verify that the numerical implementation reproduces
-the behavior implied by the assumed transport exponent and observation
-model.
-
-\subsection{Epistemic status and regime of validity}
-
-The CTRW scaling obtained here is epistemic and construction-based.
-It reflects limitations imposed by anomalous transport combined with a
-Poisson-limited observation channel and vanishes in the limit of
-unbounded information rate.
-Deviations from Eq.~\eqref{eq:ctrw_scaling} diagnose pre-asymptotic
-regimes, breakdown of the assumed MSD scaling, or unmodeled information
-channels rather than ontological constraints.
-
-\subsection{Falsifiability}
-
-Observation of sustained scaling steeper than
-$\Phi^{-1/(2+\alpha)}$ under the same CTRW and observation assumptions
-would falsify the rate-limited hypothesis for anomalous diffusion.
-Conversely, systematic deviations toward weaker scaling indicate noise,
-finite-sample effects, or model misspecification.
+Existing CTRW Monte Carlo demonstrations in the repository that start from
+$\delta t_0\propto \Phi^{-1/(2+\alpha)}$ are Class~0B
+(exponent-imposed generators) and serve only as pipeline consistency checks,
+not as inference evidence.
 
 % ============================================================
 % End of appendices/B_ctrw_derivations.tex

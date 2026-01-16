@@ -25,7 +25,7 @@ faster than the envelope implied by the corresponding bound on accumulated
 \begin{proposition}[Universality across realizations]
 \label{prop:fals_universal}
 Distinct physical realizations sharing the same effective
-distinguishability-rate envelope exhibit identical operational scaling laws,
+distinguishability-rate envelope exhibit identical operational resolution bounds,
 independent of microscopic dynamics.
 \end{proposition}
 
@@ -37,10 +37,10 @@ interrogation time (a meeting point).
 \end{proposition}
 
 \paragraph{Falsification rule.}
-Persistent and reproducible violation of any proposition above---without
-modifying the declared observation channel class or adding independent
-distinguishability resources beyond that class---falsifies DRT for the
-corresponding regime.
+Persistent and reproducible violation of any proposition above—without
+modifying the declared observation channel class or introducing additional
+independent distinguishability resources—falsifies DRT for the corresponding
+regime.
 
 \subsection{Regime Map and Validity Domains}
 
@@ -50,28 +50,35 @@ regime includes its validity domain and falsifiability hook.
 \begin{itemize}
 \item \textbf{i.i.d.\ inference regime.}\\
 \emph{Domain:} Independent detection events with finite count or flux statistics.\\
-\emph{Signature:} Poissonian accumulation; power-law scalings (e.g.\ $\Flux^{-1/3}$).\\
+\emph{Signature:} Poissonian information accumulation; inference-limited
+shot-noise behavior ($\Flux^{-1/2}$).
+Closure-limited self-consistent constructions (e.g.\ $\Flux^{-1/3}$) may arise
+under additional estimator–window coupling assumptions.\\
 \emph{Falsifiability:} Super-Poissonian accumulation without new channels.
 
 \item \textbf{Correlation-limited (non-\iid) regime.}\\
 \emph{Domain:} Continuous monitoring; correlated data streams.\\
-\emph{Signature:} Information in temporal correlations; \mbox{linear-in-$T$~asymptotics}.\\
+\emph{Signature:} Information encoded in temporal correlations;
+\mbox{linear-in-$T$~asymptotics}.\\
 \emph{Falsifiability:} Super-linear accumulation without altered correlations.
 
 \item \textbf{Noise/decoherence-limited regime.}\\
 \emph{Domain:} Exponential suppression of distinguishability rates.\\
 \emph{Signature:} Saturation and meeting-point behavior.\\
-\emph{Falsifiability:} Unbounded growth without reducing noise or changing protocols.
+\emph{Falsifiability:} Unbounded growth without reducing noise or changing
+protocols.
 
 \item \textbf{Finite-resource (pre-asymptotic) regime.}\\
 \emph{Domain:} Short $T$ or low $\Flux$.\\
 \emph{Signature:} Transient deviations from asymptotic scaling.\\
 \emph{Falsifiability:} Persistence of deviations after increasing resources.
 
-\item \textbf{Ontological regime.}\\
-\emph{Domain:} Constraints persisting under epistemic exhaustion.\\
-\emph{Signature:} Non-relaxable bounds not Fisher/QFI-reducible.\\
-\emph{Falsifiability:} Relaxation under increased distinguishability would invalidate ontological classification.
+\item \textbf{Non-epistemic regime (channel-relative).}\\
+\emph{Domain:} Constraints persisting under epistemic exhaustion within a fixed
+observation channel class.\\
+\emph{Signature:} Non-relaxable bounds not Fisher/QFI-reducible within that class.\\
+\emph{Falsifiability:} Relaxation under increased distinguishability within the
+same channel class would invalidate non-epistemic classification.
 \end{itemize}
 
 \subsection{Diagnostic interpretation of deviations}
@@ -82,38 +89,43 @@ Observed deviations are interpreted as follows:
 channels or additional degrees of freedom.
 \item \textbf{Weaker scaling or early saturation} $\Rightarrow$ noise,
 decoherence, or model misspecification.
-\item \textbf{Non-relaxable bounds} $\Rightarrow$ ontological residues rather than
-inference limits.
+\item \textbf{Non-relaxable bounds} $\Rightarrow$ non-epistemic residues relative
+to the declared channel class.
 \end{itemize}
 
 \subsection{Experimental programs}
 
 \paragraph{Classical diffusion.}
-Vary photon flux to test $\Flux^{-1/3}$ and $\Flux^{-1/(2+\alpha)}$ scalings and
-collapse across systems with different $D$.
+Vary photon flux to test closure-limited constructions
+(e.g.\ $\Flux^{-1/3}$, $\Flux^{-1/(2+\alpha)}$)
+and verify collapse across systems with different diffusion constants under
+identical observation models.
 
 \paragraph{Continuous monitoring.}
-Long-duration monitoring of correlated processes to test \mbox{linear-in-$T$~}
-accumulation and exclude super-linear growth without new channels.
+Long-duration monitoring of correlated processes to test
+\mbox{linear-in-$T$~}information accumulation and exclude super-linear growth
+without altered correlation structure.
 
 \paragraph{Quantum interferometry.}
 Controlled tuning of visibility and decoherence in Ramsey and Mach--Zehnder
-interferometry to observe meeting points and saturation.
+interferometry to observe meeting points and saturation consistent with
+rate-envelope predictions.
 
 \subsection{Explicit non-claims}
 
 For clarity:
 \begin{itemize}
-\item No claim of fundamental discreteness of time, phase, or parameters.
+\item No claim of fundamental discreteness of time, phase, or other parameters.
 \item No prohibition of improved resolution via genuinely new resources.
-\item No interpretation of quantum mechanics is proposed.
+\item No interpretation or modification of quantum mechanics is proposed.
 \end{itemize}
 
 \subsection{Broader implications}
 
 DRT reframes ``limits'' as diagnostics of inference architecture.
-Epistemic bounds acquire precise operational meaning, while genuinely
-non-classical features are isolated as ontological structure.
+Epistemic bounds acquire precise operational meaning, while constraints that
+persist under epistemic exhaustion are isolated as non-epistemic structure
+relative to fixed observation channel classes.
 
 % ============================================================
 % End of sections/08_implications_falsifiability.tex

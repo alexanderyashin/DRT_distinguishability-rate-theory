@@ -1,5 +1,5 @@
 % ============================================================
-% sections/02_operational_framework.tex
+% sections/02_operational_framework.tex  (FULL REPLACEMENT)
 % ============================================================
 
 \section{Operational Framework}
@@ -8,7 +8,7 @@
 This section establishes the operational language used throughout the paper.
 All notions introduced here are explicitly \emph{epistemic}: they concern
 inference under finite data, finite-rate observation, and noise, and make no
-ontological claims about the underlying parameters.
+ontological claims about the existence or nature of the underlying parameters.
 
 \subsection{Observation channels and parameters}
 
@@ -19,9 +19,10 @@ to observable data $Y_T$ over an observation window $T$, together with the
 associated statistical model $p(Y_T|\theta)$.
 \end{definition}
 
-The observation channel may represent i.i.d.\ sampling, continuous monitoring,
-or a quantum measurement protocol. The framework does not assume independence of
-data unless stated explicitly.
+An observation channel may represent i.i.d.\ sampling, continuous monitoring, or
+a quantum measurement protocol. Independence of data is \emph{not} assumed unless
+stated explicitly. All bounds derived in this paper are conditional on the chosen
+channel specification.
 
 \subsection{Distinguishability as an operational primitive}
 
@@ -44,10 +45,11 @@ For quantum systems, $\FI_T(\theta)$ is replaced by the quantum Fisher
 information $\mathcal{F}_{Q,T}(\theta)$, defined as the supremum of classical Fisher
 information over all admissible measurements.
 
-The role of $\FI_T$ and $\mathcal{F}_{Q,T}$ is strictly operational: they provide the unique
-local quadratic form governing statistical separability. No assumption is made
-that the corresponding Cramér--Rao bound is saturable in finite time or under
-realistic noise conditions.
+Both $\FI_T$ and $\mathcal{F}_{Q,T}$ are used here strictly as \emph{local
+information metrics}: they define the quadratic geometry governing statistical
+separability of nearby hypotheses. No assumption is made that the corresponding
+Cramér--Rao bounds are saturable in finite time, under realistic noise, or under
+arbitrary measurement constraints.
 
 \subsection{Decision thresholds and operational resolution}
 
@@ -75,9 +77,10 @@ This inequality defines an inference-limited minimal resolvable scale
 where $u$ denotes the direction in parameter space under consideration.
 
 \begin{remark}
-Equation~\eqref{eq:decision_threshold} is geometric in nature: operational
-resolution is controlled by a local quadratic form whose magnitude is determined
-by the information accumulated through the observation channel.
+Equation~\eqref{eq:decision_threshold} is purely operational and geometric in
+nature. It expresses distinguishability in terms of a local quadratic form and
+does not constitute a claim about optimal estimators, asymptotic efficiency, or
+attainability.
 \end{remark}
 
 \subsection{Distinguishability rate}
@@ -94,18 +97,19 @@ with $\FI_t$ replaced by $\mathcal{F}_{Q,t}$ for quantum channels.
 
 In realistic measurement scenarios, $\DistRate$ is bounded by finite count rates,
 finite bandwidth, decoherence, or other noise processes. The central operational
-statement of DRT is that inference is limited by integrals of $\DistRate$, rather
-than by microscopic dynamics alone.
+statement of DRT is that inference is limited by the \emph{integral} of
+$\DistRate$, rather than by idealized microscopic dynamics alone.
 
 This rate-based perspective separates two qualitatively distinct regimes:
 \begin{itemize}
-  \item \textbf{Dynamics-limited regimes,} where information accumulates
-  sufficiently rapidly that intrinsic system scales dominate resolution.
-  \item \textbf{Inference-limited regimes,} where finite $\DistRate$ sets the
-  dominant bound on achievable resolution, independent of idealized dynamics.
+  \item \textbf{Dynamics-limited regimes,} in which information accumulates
+  sufficiently rapidly that intrinsic system scales dominate achievable
+  resolution.
+  \item \textbf{Inference-limited regimes,} in which finite $\DistRate$ sets the
+  dominant bound on resolution, independently of idealized dynamics.
 \end{itemize}
 
-\subsection{Accumulation structure and regimes}
+\subsection{Accumulation structure and inference regimes}
 
 The operational framework applies uniformly across different observation models:
 \begin{itemize}
@@ -117,8 +121,8 @@ The operational framework applies uniformly across different observation models:
   non-additive (treated explicitly in
   Section~\ref{sec:continuous_monitoring}).
   \item \textbf{Quantum measurements:} channels constrained by quantum mechanics,
-  where $\mathcal{F}_{Q,T}$ provides an operational upper bound on achievable classical
-  Fisher information
+  for which $\mathcal{F}_{Q,T}$ provides an operational upper envelope on
+  achievable classical Fisher information
   (Section~\ref{sec:quantum_systems}).
 \end{itemize}
 In all cases, the same decision inequality
@@ -128,14 +132,14 @@ accumulated information differ.
 \subsection{Epistemic scope and non-claims}
 
 The framework introduced here makes no ontological assertions. A bound on
-$\delta\theta_{\min}$ derived from finite $\FI_T$ or $\mathcal{F}_{Q,T}$ states only that,
-under the specified observation channel and decision threshold, finer resolution
-is not operationally achievable. It does not imply that the parameter itself is
-ill-defined or fundamentally bounded.
+$\delta\theta_{\min}$ derived from finite $\FI_T$ or $\mathcal{F}_{Q,T}$ states only
+that, under the specified observation channel and decision threshold, finer
+resolution is not operationally achievable. It does not imply that the parameter
+itself is ill-defined, discrete, or fundamentally bounded.
 
-Situations in which resolution limits cannot be reduced to local Fisher or QFI
-geometry—without additional global, algebraic, or compatibility assumptions—are
-identified later as \emph{ontological residues}
+Situations in which resolution limits cannot be reduced to local Fisher or quantum
+Fisher geometry—without additional global, algebraic, or compatibility
+assumptions—are identified later as \emph{ontological residues}
 (Section~\ref{sec:ontological_residues}). Maintaining this separation is a core
 methodological principle of DRT.
 
@@ -144,9 +148,8 @@ methodological principle of DRT.
 With the operational language established, the next section derives general
 rate-limited bounds by combining the decision inequality
 \eqref{eq:decision_threshold} with explicit upper bounds on the distinguishability
-rate $\DistRate$. These results constitute the theoretical engine of DRT and
-underpin all classical and quantum applications developed in the remainder of
-the paper.
+rate $\DistRate$. These results form the technical core of DRT and underpin all
+classical and quantum applications developed in the remainder of the paper.
 
 % ============================================================
 % End of sections/02_operational_framework.tex

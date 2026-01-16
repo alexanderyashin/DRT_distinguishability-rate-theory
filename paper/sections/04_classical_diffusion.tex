@@ -7,10 +7,12 @@
 
 This section provides a concrete classical realization of the
 rate-limited framework. We analyze inference of elapsed time from a
-diffusive trajectory observed through a photon-limited channel.
-No new stochastic physics is introduced. The purpose is to show how a
-universal operational scaling \emph{construction} follows from
-information-rate constraints and self-consistent closure alone.
+diffusive trajectory observed through a photon-limited localization
+channel. No new stochastic physics is introduced. The purpose is to show
+how an operational scaling \emph{construction} follows from
+information-rate constraints together with a self-consistent closure
+(Class~0A), and how this differs from inference-only optimum-time
+regimes.
 
 \subsection{Model and observation channel}
 
@@ -20,61 +22,61 @@ $D$, characterized by the mean-squared displacement
 \langle x^2(t) \rangle = 2Dt .
 \end{equation}
 The system is observed via a Poissonian detection process with photon
-flux $\Flux$. Each detection produces a noisy position estimate with
+flux $\Flux$. Each detection produces a noisy position sample with
 Gaussian point-spread uncertainty $\sigma_m$.
 
 The observation channel is specified by:
 \begin{itemize}
-\item[(C1)] Poissonian (i.i.d.) photon counts with mean rate $\Flux$;
+\item[(C1)] Poissonian photon counts with mean rate $\Flux$;
 \item[(C2)] finite spatial resolution $\sigma_m$;
 \item[(C3)] continuous-time latent diffusion dynamics.
 \end{itemize}
 The inferred parameter is the elapsed time $t$, accessed indirectly
-through the statistics of measured positions.
+through the time-dependence of the observed variance.
 
 \subsection{Information accumulation mechanism}
 
-Each detection event contributes finite Fisher information about the
-particle position and, indirectly, about elapsed time through the
-diffusive growth of spatial uncertainty. Crucially, the Fisher
-information gained per detection depends on the instantaneous
-localization uncertainty, which itself evolves due to diffusion and
-measurement backaction.
-
-Operationally, the accumulated Fisher information about time can be
-written as
+Each detection event contributes finite Fisher information about elapsed
+time through the diffusive growth of the observable variance. In the
+Gaussian-local regime used in this paper, the Fisher information about
+time under the Poisson-limited channel can be written in rate form,
 \begin{equation}
 \FI_T(t)
 \;=\;
-\int_0^T \DistRate(t')\,dt' ,
+\int_0^{t} \DistRate(t')\,dt' ,
 \end{equation}
-where $\DistRate(t')$ is the instantaneous distinguishability rate.
-This rate is bounded by the photon flux $\Flux$ and suppressed when the
-diffusive spread $\sqrt{2Dt'}$ exceeds the measurement resolution
-$\sigma_m$. The feedback between diffusion-induced uncertainty growth
-and measurement-induced uncertainty reduction is the central mechanism
-governing the resulting closure.
+where $\DistRate(t')$ is the instantaneous distinguishability (FI)
+accumulation rate, bounded by the photon flux $\Flux$ and suppressed when
+the observable variance is large.
 
-\subsection{Self-consistent localization and scaling}
+\paragraph{Guard against a common surrogate.}
+We explicitly \emph{do not} model ``effective estimator variance'' as
+$2Dt+\sigma_m^2/(\Flux t)$ and then impose a fixed-point relation
+$\delta t \sim \sigma_{\mathrm{est}}^2(\delta t)/(2D)$.
+That chain algebraically leads to $\delta t \propto \Flux^{-1/2}$ and
+corresponds to an inference-only optimum-time regime, not to the Class~0A
+closure used here. Our $\Flux^{-1/3}$ scaling is derived solely from the
+estimator-variance closure in Appendix~\ref{app:phi_minus_one_third}.
 
-The inference problem closes through a self-consistency condition.
-Diffusion increases spatial uncertainty as $\sqrt{2Dt}$, while
-measurements reduce uncertainty at a rate proportional to the photon
-flux $\Flux$. The minimal resolvable time scale corresponds to a
-fixed point at which information extraction balances uncertainty
-generation.
+\subsection{Self-consistent closure and scaling (Class 0A)}
 
-\begin{theorem}[Self-consistent diffusion scaling]
+The inference problem closes through a self-consistency condition:
+finite photon flux limits how quickly time-information can be harvested,
+and the resulting estimator variance feeds back into the effective
+observation window. This produces a closure (Class~0A) rather than a
+CRLB-style extremization.
+
+\begin{theorem}[Self-consistent diffusion scaling (Class 0A)]
 \label{thm:phi_minus_one_third}
-Consider normal diffusion observed through a Poisson-limited channel
-with flux $\Flux$ and spatial resolution $\sigma_m$.
-Under assumptions (C1)--(C3) and local distinguishability geometry,
-the minimal operationally resolvable time scale satisfies
+Consider normal diffusion observed through a Poisson-limited localization
+channel with flux $\Flux$ and spatial resolution $\sigma_m$.
+Under assumptions (C1)--(C3) and local distinguishability geometry, the
+minimal operationally resolvable time scale satisfies
 \begin{equation}
 \delta t_{\min}
 \;\sim\;
 \left(
-\frac{\sigma_m^2}{D^2\,\Flux}
+\frac{\sigma_m^4}{D^2\,\Flux}
 \right)^{1/3}
 \;\propto\;
 \Flux^{-1/3}.
@@ -87,93 +89,91 @@ the minimal operationally resolvable time scale satisfies
 \item[(A1)] Poissonian detection with finite flux $\Flux$;
 \item[(A2)] Gaussian measurement noise of fixed width $\sigma_m$;
 \item[(A3)] validity of local (quadratic) Fisher-information geometry;
-\item[(A4)] existence of a self-consistent fixed point where diffusion
-and information gain balance.
+\item[(A4)] existence of a self-consistent closure identifying the
+effective observation window with the resolution scale (Class~0A).
 \end{itemize}
 
-\paragraph{Proof sketch.}
-Diffusion increases localization uncertainty as $\sqrt{2Dt}$, reducing
-the Fisher information per detection, while measurements decrease
-uncertainty at a rate proportional to $\Flux$.
-Equating the diffusion-induced growth of uncertainty with the
-measurement-induced reduction yields a fixed-point condition.
-Solving this condition produces the cubic-root scaling.
-A detailed derivation is given in Appendix~A.
+\paragraph{Proof sketch (pointer only).}
+The proof is a direct unpacking of the estimator-variance closure:
+(i) define an explicit estimator of elapsed time via the observed
+variance, (ii) compute its finite-sample variance under $N\sim
+\mathrm{Poisson}(\Flux t)$ detections, and (iii) impose the closure
+$\delta t^2 \sim \mathrm{Var}[\widehat{t}]$ at $t=\delta t$.
+This yields $\delta t^3 \propto \sigma_m^4/(D^2\Flux)$ and hence
+$\delta t\propto \Flux^{-1/3}$.
+The full derivation (including the FI form consistent with the closure)
+is given in Appendix~\ref{app:phi_minus_one_third}.
 \hfill$\square$
 
 \paragraph{Interpretation and epistemic status.}
 Theorem~\ref{thm:phi_minus_one_third} is a
-\emph{self-consistent fixed-point construction} (Class~0A; non-inference).
-It constrains achievable time resolution under the specified
-observation channel and does not represent a scaling bound established
-by decision-based inference.
-No intrinsic granularity or discreteness of time is implied.
+\emph{self-consistent closure construction} (Class~0A; non-inference).
+It constrains achievable time resolution under the specified channel and
+does not represent a scaling law established by inference optimality.
+No intrinsic discreteness of time is implied.
 
 \subsection{Numerical consistency checks}
 
 The $\Flux^{-1/3}$ scaling constructed above is accompanied by frozen
 Monte Carlo simulations combining explicit diffusive trajectories with
-Poisson detection and Gaussian measurement noise.
-These simulations implement the specified observation model and serve
-as \emph{numerical consistency checks} of the analytic construction and
-the slope-fitting pipeline.
-They do not constitute independent inference evidence for the scaling
+Poisson detection and Gaussian measurement noise. These simulations
+implement the specified observation model and serve as \emph{numerical
+consistency checks} of the analytic construction and the slope-fitting
+pipeline. They do not constitute independent inference evidence for the
 exponent.
 
 The frozen Evidence Pack yields fitted slopes consistent with the
 construction exponent $-1/3$ across multiple decades in $\Flux$
-(Figure~\ref{fig:phi_scaling}).
-Robustness against statistical fluctuations and finite-$\Flux$ effects
-is illustrated by multi-seed slope statistics
-(Figure~\ref{fig:phi_hist}).
-All numerical protocols and random seeds are fixed and documented
-(Appendices~D and~E).
+(Figure~\ref{fig:phi_scaling}). Robustness against statistical
+fluctuations and finite-$\Flux$ effects is illustrated by multi-seed
+slope statistics (Figure~\ref{fig:phi_hist}). All numerical protocols and
+random seeds are fixed and documented (Appendices~D and~E).
 
 \subsection{Regime of validity}
 
-The construction applies in the inference-limited regime where:
+The construction applies in the closure-limited regime where:
 \begin{itemize}
 \item[(R1)] photon statistics are Poissonian;
-\item[(R2)] observation times are sufficient to reach the
-self-consistent fixed point;
-\item[(R3)] systematic effects (drift, miscalibration) are negligible.
+\item[(R2)] observation windows are sufficient for the closure to be
+well-posed (Appendix~\ref{app:phi_minus_one_third});
+\item[(R3)] systematic effects (drift, miscalibration) are negligible;
+\item[(R4)] the closure occurs while $2D\,\delta t \ll \sigma_m^2$ so that
+the observable variance is measurement-dominated at the fixed point.
 \end{itemize}
-Deviations from the predicted envelope diagnose finite-resource
-(pre-asymptotic) effects or violations of the assumed observation
-channel, not a failure of diffusive dynamics.
+Deviations from the predicted envelope diagnose pre-asymptotic effects
+or violations of the assumed observation channel, not a failure of
+diffusive dynamics.
 
 \paragraph{Falsifiability.}
 Observation of a scaling steeper than $\Flux^{-1/3}$ under assumptions
-(C1)--(C3) would falsify the applicability of the
-self-consistent fixed-point construction in this setting and, with it,
-the rate-limited hypothesis under the stated channel assumptions.
+(C1)--(C3) would falsify the applicability of the Class~0A closure in
+this setting and, with it, the stated rate-limited hypothesis under the
+given channel assumptions.
 
 \subsection{Extension to anomalous diffusion}
 
-The same self-consistent closure logic applies to anomalous transport
-with mean-squared displacement $\mathrm{MSD}(t)\sim t^\alpha$.
+The same closure logic can be written for anomalous transport with
+$\mathrm{MSD}(t)\sim t^\alpha$.
 
-\begin{theorem}[Anomalous diffusion / CTRW generalization]
+\begin{theorem}[Anomalous diffusion / CTRW generalization (Class 0B status)]
 \label{thm:ctrw_generalization}
 Assume anomalous transport with $\mathrm{MSD}(t)\sim t^\alpha$ for
 $0<\alpha<2$ under the same Poisson-limited observation channel.
-Then the minimal operationally resolvable time scale obeys
+Then the closure construction yields
 \begin{equation}
 \delta t_{\min}\;\propto\;\Flux^{-1/(2+\alpha)}.
 \end{equation}
 \end{theorem}
 
 \paragraph{Status.}
-Theorem~\ref{thm:ctrw_generalization} is epistemic and should be
-interpreted as an analytic generalization of the fixed-point
-construction.
+Theorem~\ref{thm:ctrw_generalization} is to be interpreted as an analytic
+extension of the fixed-point/closure logic.
 It reduces to Theorem~\ref{thm:phi_minus_one_third} for $\alpha=1$ and is
-derived formally in Appendix~B.
-The accompanying CTRW $\alpha$-sweep
-(Figure~\ref{fig:ctrw_alpha}) is generated by an exponent-imposed CTRW
-simulator (Class~0B; non-inference) and serves as a numerical
-consistency check of the construction and analysis pipeline rather than
-as inference validation.
+derived formally in Appendix~\ref{app:ctrw_derivations}.
+The accompanying CTRW $\alpha$-sweep (Figure~\ref{fig:ctrw_alpha}) is
+generated by an exponent-imposed CTRW simulator (Class~0B; non-inference)
+and serves as a numerical consistency check of the construction and
+analysis pipeline rather than as inference validation.
 
 % ============================================================
 % End of sections/04_classical_diffusion.tex

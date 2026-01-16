@@ -1,0 +1,33 @@
+{
+  "title": "Distinguishability as a Physical Primitive: Rate-Limited Inference, Temporal Resolution, and the Boundary of Quantum Ontology",
+  "description": "This repository contains a journal-grade, fully reproducible research article and simulation suite on Distinguishability Rate Theory (DRT). DRT provides an operational framework for analyzing limits of temporal, phase, and parameter resolution as consequences of finite distinguishability accumulation rates imposed by observation channels. The work formally separates epistemic (Fisher/QFI-reducible) inference limits from non-epistemic, ontological constraints arising from global or algebraic structure (e.g. Bell/Kochen–Specker contextuality). All numerical simulations serve reproducibility and regime illustration only; analytic results are not inferred from simulation output.",
+  "version": "1.0.0",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Yashin, Alexander",
+      "affiliation": "Independent Researcher, Germany",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "keywords": [
+    "distinguishability",
+    "fisher information",
+    "quantum fisher information",
+    "time resolution",
+    "inference limits",
+    "quantum metrology",
+    "foundations of physics",
+    "information theory",
+    "ontology of continua",
+    "continuous monitoring"
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "communities": [
+    {
+      "identifier": "physics"
+    }
+  ],
+  "notes": "This deposit corresponds to a frozen, auditable repository state used for journal submission. All figures and numerical artifacts are generated deterministically from the included code and documented Monte Carlo protocols. No external or unpublished data sources are required."
+}

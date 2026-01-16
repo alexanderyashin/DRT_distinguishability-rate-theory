@@ -1,16 +1,21 @@
 % ============================================================
-% sections/07_ontological_residues.tex
+% sections/07_ontological_residues.tex  (FULL REPLACEMENT)
 % ============================================================
 
 \section{Non-Epistemic Residues within Fixed Channel Classes}
 \label{sec:ontological_residues}
 
-The preceding sections established a variety of rate-limited bounds arising from
-local distinguishability and inference.
-Using the operational framework introduced in
-Section~\ref{sec:definitions_criterion}, we now analyze which constraints persist
-once all Fisher-reducible limitations within a fixed observation channel class
-have been exhausted.
+The preceding sections derived a hierarchy of rate-limited bounds arising from
+local distinguishability geometry and finite information accumulation.
+Using the operational criterion introduced in
+Section~\ref{sec:definitions_criterion}, we now analyze which constraints
+\emph{persist} once all Fisher-reducible limitations within a fixed observation
+channel class have been exhausted.
+
+Throughout this section, ``non-epistemic'' is used in a \emph{strictly operational
+sense}: it denotes constraints that cannot be removed by improving inference
+within the declared channel class.
+No claim is made about ultimate ontology beyond that scope.
 
 \subsection{Non-epistemic residues}
 
@@ -18,82 +23,102 @@ have been exhausted.
 Within a fixed observation channel class $\mathcal{C}$, a
 \emph{non-epistemic residue} is a constraint that:
 \begin{itemize}
-\item[(i)] persists under epistemic exhaustion as defined in
+\item[(i)] persists under epistemic exhaustion within $\mathcal{C}$, as defined in
 Section~\ref{sec:definitions_criterion}, and
-\item[(ii)] cannot be expressed as a Fisher-reducible bound within $\mathcal{C}$.
+\item[(ii)] cannot be expressed as, or reduced to, a Fisher- or QFI-reducible bound
+within $\mathcal{C}$.
 \end{itemize}
 \end{definition}
 
-Such residues indicate limitations not attributable to inference or local
-distinguishability within the declared scope.
+Operationally, a non-epistemic residue marks the point at which inference-based
+improvements saturate without eliminating the constraint, given the fixed event
+structure and admissible operations defining $\mathcal{C}$.
 
 \subsection{Examples and non-examples}
 
-\paragraph{Epistemic bounds.}
-Mandelstam--Tamm--type speed limits, noise-suppressed Ramsey bounds, and
-Poisson-limited localization vanish under epistemic exhaustion within their
-respective channel classes.
-They are therefore epistemic in the sense of
+\paragraph{Purely epistemic bounds.}
+Mandelstam--Tamm-type speed limits, noise-suppressed Ramsey bounds, and
+Poisson-limited localization bounds all relax under epistemic exhaustion when the
+distinguishability rate envelope within their respective channel classes is
+expanded.
+They are therefore epistemic according to
 Theorem~\ref{thm:operational_criterion}.
 
 \paragraph{Intermediate cases.}
-Bounds such as the Margolus--Levitin limit depend on additional global assumptions
-(e.g.\ spectral constraints).
-Their classification is conditional on these assumptions and lies outside the
-strict diagnostic scope of DRT.
+Bounds such as the Margolus--Levitin limit depend explicitly on additional global
+assumptions (e.g.\ spectral references or energy constraints).
+Their classification is conditional on these assumptions and therefore lies
+outside the strict diagnostic scope of DRT.
+DRT neither affirms nor rejects such bounds; it isolates the assumptions on which
+they rest.
 
 \paragraph{Persistent constraints.}
-Constraints associated with non-classical event structure---such as Bell or
-Kochen--Specker inequalities---persist under epistemic exhaustion within any
-channel class that preserves classical event algebra.
-Within this scope, they constitute non-epistemic residues.
+Constraints associated with non-classical event structure—such as Bell or
+Kochen--Specker inequalities—persist under epistemic exhaustion within any channel
+class whose admissible operations preserve classical event algebra.
+Within that scope, they constitute non-epistemic residues.
 
 \subsection{No-Free-Epistemic-Lunch principle}
 
 \begin{theorem}[No-Free-Epistemic-Lunch (NFEL)]
 \label{thm:nfel}
 Within a fixed observation channel class $\mathcal{C}$, no sequence of epistemic
-operations can generate, remove, or violate constraints arising from non-classical
-event structure.
+operations—i.e.\ operations acting solely on Fisher- or QFI-reducible structures
+within $\mathcal{C}$—can generate, remove, or violate constraints arising from
+non-classical event structure.
 \end{theorem}
 
 \paragraph{Assumptions.}
 \begin{itemize}
-\item[(N1)] Epistemic operations act only on local probability distributions or
-density operators within $\mathcal{C}$.
-\item[(N2)] Event-structure constraints encode global compatibility relations not
-captured by local distinguishability.
+\item[(N1)] Epistemic operations modify only local probability distributions,
+density operators, or control parameters admissible within $\mathcal{C}$.
+\item[(N2)] The event structure defining $\mathcal{C}$ (e.g.\ classical or
+non-classical compatibility relations) is held fixed.
 \end{itemize}
 
 \paragraph{Proof sketch.}
-Epistemic operations modify Fisher-reducible quantities while preserving the
-event structure defining $\mathcal{C}$.
-Constraints rooted in non-classical event structure therefore remain invariant
-under epistemic exhaustion.
+Epistemic operations act within the local distinguishability geometry associated
+with $\mathcal{C}$.
+They can modify Fisher- or QFI-reducible quantities but do not alter the global
+event structure or compatibility relations that define which joint events are
+admissible.
+Constraints rooted in this event structure therefore remain invariant under
+epistemic exhaustion.
 \hfill$\square$
 
 \subsection{Interpretational role}
 
-Non-epistemic residues mark the boundary of applicability of inference-based
-reasoning.
-DRT does not interpret these residues as fundamental ontological claims beyond
-the declared channel class; it identifies them as constraints not removable by
-improved inference alone.
+Non-epistemic residues delineate the boundary of applicability of
+inference-based reasoning within a fixed channel class.
+DRT does not elevate these residues to universal ontological statements.
+Instead, it identifies them as constraints that cannot be removed by improving
+distinguishability rates, decision rules, or estimation protocols alone, without
+altering the underlying event structure.
 
 \subsection{Relation to quantum theory}
 
-In quantum mechanics, non-epistemic residues correspond to global compatibility
-and contextuality constraints.
-These structures are invisible to local information geometry and lie outside the
-scope of rate-limited inference.
-DRT neither derives nor negates them; it delineates where inference-based analysis
-terminates.
+In quantum mechanics, non-epistemic residues correspond to global compatibility,
+contextuality, and non-Boolean event structure.
+These features are invisible to local Fisher or QFI geometry and therefore lie
+outside the scope of rate-limited inference.
+DRT neither derives nor negates such structures; it specifies where
+inference-based diagnostics cease to apply.
 
-\subsection{Transition to falsifiability}
+\subsection{Falsifiability boundary}
 
-Having operationally isolated non-epistemic residues, we now translate this
-classification into experimentally testable diagnostics.
-The next section formulates explicit regime maps and falsifiability criteria.
+The classification introduced here is operationally falsifiable.
+A purported non-epistemic residue would be reclassified as epistemic if a protocol
+operating entirely within the declared channel class $\mathcal{C}$ were shown to
+remove or violate it through improved inference alone.
+Conversely, persistence of the constraint under exhaustive epistemic variation
+confirms its status as a non-epistemic residue relative to $\mathcal{C}$.
+
+\subsection{Transition}
+
+Having isolated the boundary between inference-limited bounds and
+non-epistemic residues, we now translate this classification into explicit regime
+maps and falsifiability diagnostics.
+The next section consolidates these results into experimentally testable criteria.
 
 % ============================================================
 % End of sections/07_ontological_residues.tex
